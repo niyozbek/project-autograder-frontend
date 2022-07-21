@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Create Test Case</h2>
+    <form [formGroup]="testCaseForm" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="input">Input</label>
+            <textarea
+              type="textarea"
+              id="input"
+              class="form-control"
+              formControlName="input"
+              rows="10"
+            ></textarea>
+          </div>
+        </div>
+
+          <div class="col-xs-6">
+            <div class="form-group">
+              <label for="expectedOutput">Expected Output</label>
+              <textarea
+                type="textarea"
+                id="expectedOutput"
+                class="form-control"
+                formControlName="expectedOutput"
+                rows="10"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success" [disabled]="!testCaseForm.valid">Save</button>
+            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
