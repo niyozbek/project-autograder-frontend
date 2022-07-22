@@ -33,12 +33,9 @@ export class ProblemTestCaseEditComponent implements OnInit {
   }
 
   private initForm() {
-    let testCaseInput = ''
-    let testCaseExpectedOutput = ''
-
     this.testCaseForm = new FormGroup({
-      'input': new FormControl(testCaseInput, Validators.required),
-      'expectedOutput': new FormControl(testCaseExpectedOutput, Validators.required)
+      'input': new FormControl('', Validators.required),
+      'expectedOutput': new FormControl('', Validators.required)
     })
   }
 

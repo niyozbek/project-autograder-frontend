@@ -60,7 +60,7 @@ export class ProblemEditComponent implements OnInit {
 
     this.problemForm = new FormGroup({
       'title': new FormControl(problemTitle, Validators.required),
-      'status': new FormControl(problemStatus, Validators.required),
+      'status': new FormControl(problemStatus),
       'description': new FormControl(problemDescription, Validators.required)
     })
   }

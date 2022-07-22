@@ -15,12 +15,14 @@ import {environment} from 'src/environments/environment';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ErrorPageComponent} from "./error-page/error-page.component";
+import {HomeComponent} from "./home/home.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),

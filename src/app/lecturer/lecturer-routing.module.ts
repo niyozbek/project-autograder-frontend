@@ -11,21 +11,15 @@ import {
 } from "./problem/problem-test-case/problem-test-case-edit/problem-test-case-edit.component";
 
 const routes: Routes = [
-  {
-    path: '', component: LecturerComponent, children: [
-      {
-        path: 'problem', component: ProblemComponent, children: [
-          {path: ':id', component: ProblemEditComponent},
-          {path: ':id/submission', component: ProblemSubmissionComponent},
-          {path: ':id/test-case', component: ProblemTestCaseComponent, children: [
-              {path: 'new', component: ProblemTestCaseEditComponent}
-            ]},
-          {path: 'new', component: ProblemEditComponent}
-        ],
-      },
-      {path: 'submission/:id', component: SubmissionComponent}
-    ]
-  }
+  {path: '', component: LecturerComponent},
+  {path: 'problem', component: ProblemComponent},
+  {path: 'problem/:id', component: ProblemEditComponent},
+  {path: 'problem/:id/submission', component: ProblemSubmissionComponent},
+  {path: 'problem/:id/test-case', component: ProblemTestCaseComponent, children: [
+      {path: 'new', component: ProblemTestCaseEditComponent}
+    ]},
+  {path: 'problem/new', component: ProblemEditComponent},
+  {path: 'submission/:id', component: SubmissionComponent}
 ]
 
 @NgModule({

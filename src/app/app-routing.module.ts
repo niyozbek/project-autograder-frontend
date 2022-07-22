@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import {AuthGuard} from "./auth/auth.guard";
 import {ErrorPageComponent} from "./error-page/error-page.component";
+import {HomeComponent} from "./home/home.component";
 
 const appRoutes: Routes = [
   { path: 'admin', canActivate: [AuthGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
@@ -9,6 +10,7 @@ const appRoutes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'student', canActivate: [AuthGuard], loadChildren: () => import('./student/student.module').then(m => m.StudentModule) },
   { path: 'not-found', component: ErrorPageComponent },
+  { path: '', component: HomeComponent},
   { path: '**', redirectTo: 'not-found' },
 
 ]
