@@ -23,15 +23,15 @@ import {ProblemTestComponent} from "./problem-test/problem-test.component";
     ProblemSubmissionComponent,
     ProblemTestComponent
   ],
-  imports: [
-    RouterModule,
-    ReactiveFormsModule,
-    StudentRoutingModule,
-    SharedModule,
-    MatPaginatorModule,
-    StoreModule.forFeature('student', fromStudent.reducers),
-    EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects]),
-  ],
+    imports: [
+        RouterModule,
+        ReactiveFormsModule,
+        StudentRoutingModule,
+        SharedModule,
+        MatPaginatorModule,
+        StoreModule.forFeature('student', fromStudent.reducers),
+        EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects]),
+    ],
 })
 export class StudentModule {
 

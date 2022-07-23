@@ -1,8 +1,7 @@
 # TODO LIST
-1. problem description editor https://www.npmjs.com/package/ngx-quill
-2. code submission, code editor https://www.npmjs.com/package/ngx-monaco-editor
-3. get runtimes pass to problem submission
-4. progress bar
+1. code submission, code editor https://www.npmjs.com/package/ngx-monaco-editor
+2. get runtimes pass to problem submission
+3. progress bar
 
 # Auto Grader
 

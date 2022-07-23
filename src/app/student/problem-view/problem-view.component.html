@@ -2,9 +2,7 @@
   <div class="col-md-6">
     <h2>Problem #{{problem.id}}: {{problem.title}} </h2>
     <a class="btn btn-default" href="#" routerLink="/student/problem/{{this.problemId}}/submission">Submissions</a>
-    <pre>
-      {{problem.description}}
-    </pre>
+    <div [innerHTML]="problem.description"></div>
   </div>
   <div class="col-md-6">
     <h2>Submit your code</h2>
