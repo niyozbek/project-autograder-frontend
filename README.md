@@ -1,10 +1,10 @@
-# Auto Grader
+# TODO LIST
+1. problem description editor https://www.npmjs.com/package/ngx-quill
+2. code submission, code editor https://www.npmjs.com/package/ngx-monaco-editor
+3. get runtimes pass to problem submission
+4. progress bar
 
-TODO list:
-1. clean crap such as firebase and unused libraries+
-2. autologin works twice, fix it+
-3. learn difference between switchMap, exhaustMap, and other maps
-4. improve user UX and UI
+# Auto Grader
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
 Use Node 12.22.12

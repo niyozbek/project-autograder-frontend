@@ -19,6 +19,7 @@ import {
 } from "./problem/problem-test-case/problem-test-case-edit/problem-test-case-edit.component";
 import {StoreModule} from "@ngrx/store";
 import * as fromLecturer from "./lecturer.reducer";
+import {QuillModule} from "ngx-quill";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import * as fromLecturer from "./lecturer.reducer";
     MatPaginatorModule,
     StoreModule.forFeature('lecturer', fromLecturer.reducers),
     EffectsModule.forFeature([ProblemEffects, SubmissionEffects, TestCaseEffects]),
+    QuillModule.forRoot(),
   ],
 })
 export class LecturerModule {

@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h2 *ngIf="!editMode">Create Problem</h2>
-    <h2 *ngIf="editMode">Update Problem</h2>
+    <h2>{{editMode ? 'Update Problem' : 'Create Problem'}}</h2>
     <form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
@@ -31,20 +30,21 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea
-              type="textarea"
-              id="description"
-              class="form-control"
-              formControlName="description"
-              rows="10"
-            ></textarea>
+            <quill-editor id="description"
+                          formControlName="description"
+                          [modules]="quillConfiguration"
+                          [styles]="{'min-height': '350px'}"
+            ></quill-editor>
           </div>
         </div>
       </div>
+
+
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success" [disabled]="!problemForm.valid">Save</button>

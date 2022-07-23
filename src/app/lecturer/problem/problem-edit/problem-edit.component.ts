@@ -8,8 +8,8 @@ import {Problem} from "../problem.model";
 import * as fromLecturer from "../../lecturer.reducer";
 
 @Component({
-  selector: 'app-lecturer-problem-detail',
-  templateUrl: './problem-edit.component.html'
+  selector: 'app-lecturer-problem-edit',
+  templateUrl: './problem-edit.component.html',
 })
 export class ProblemEditComponent implements OnInit {
   problem: Problem
@@ -17,6 +17,7 @@ export class ProblemEditComponent implements OnInit {
   id: number
   editMode = false
   problemForm: FormGroup
+  quillConfiguration: any
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +52,18 @@ export class ProblemEditComponent implements OnInit {
       this.problem = problem.problem
       this.initForm()
     })
+
+    this.quillConfiguration = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{list: 'ordered'}, {list: 'bullet'}],
+        [{header: [1, 2, 3, 4, 5, 6, false]}],
+        [{color: []}, {background: []}],
+        ['link'],
+        ['clean'],
+      ],
+    };
   }
 
   private initForm() {
