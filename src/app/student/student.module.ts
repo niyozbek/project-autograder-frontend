@@ -14,6 +14,7 @@ import {ProblemViewComponent} from "./problem-view/problem-view.component";
 import {ProblemSubmissionComponent} from "./problem-submission/problem-submission.component";
 import {ProblemSubmissionEffects} from "./problem-submission/problem-submission.effects";
 import {ProblemTestComponent} from "./problem-test/problem-test.component";
+import {MonacoEditorModule} from "ngx-monaco-editor";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {ProblemTestComponent} from "./problem-test/problem-test.component";
         MatPaginatorModule,
         StoreModule.forFeature('student', fromStudent.reducers),
         EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects]),
+        MonacoEditorModule.forRoot()
     ],
 })
 export class StudentModule {

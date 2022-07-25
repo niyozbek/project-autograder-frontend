@@ -9,7 +9,7 @@
         <th>Language</th>
         <th>Version</th>
         <th>FileName</th>
-        <th>StudentId</th>
+        <th>Status</th>
         <th></th>
       </tr>
       </thead>
@@ -20,6 +20,7 @@
         <td>{{submission.language}} </td>
         <td>{{submission.version}} </td>
         <td>{{submission.filename}} </td>
+        <td><span style="font-size: 14px" class="{{statusMaps[i].labelStyle}}">{{statusMaps[i].label}}</span> </td>
         <td><a class="btn-link" href="#" routerLink="/student/submission/{{submission.id}}">Details</a></td>
       </tr>
       </tbody>

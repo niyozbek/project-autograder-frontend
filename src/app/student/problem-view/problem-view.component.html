@@ -16,6 +16,7 @@
               id="language"
               class="form-control"
               formControlName="language"
+              (ngModelChange)="valueChange($event)"
             >
           </div>
         </div>
@@ -46,13 +47,11 @@
         <div class="col-md-12">
           <div class="form-group">
             <label for="code">Code</label>
-            <textarea
-              type="textarea"
-              id="code"
-              class="form-control"
-              formControlName="code"
-              rows="25"
-            ></textarea>
+            <div style="height: 500px">
+              <ngx-monaco-editor id="code"
+                                 [options]="{language: this.editorOptions.language, theme: this.editorOptions.theme}"
+                                 formControlName="code" style="height: 100%"></ngx-monaco-editor>
+            </div>
           </div>
         </div>
       </div>

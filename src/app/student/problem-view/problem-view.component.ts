@@ -18,6 +18,9 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
   problem: Problem
   submissionForm: FormGroup
 
+  // monaco-editor-settings
+  editorOptions = {theme: 'vs-dark', language: 'java'};
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -42,6 +45,7 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
     ).subscribe(problems => {
       this.problem = problems.problem
     })
+
     this.initForm()
   }
 
@@ -64,5 +68,9 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe()
+  }
+
+  valueChange(language: string) {
+    this.editorOptions.language = language
   }
 }

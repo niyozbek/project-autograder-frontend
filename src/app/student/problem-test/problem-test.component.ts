@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import * as SubmissionActions from '../problem-submission/problem-submission.actions';
 import {ActivatedRoute, Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
-import {Submission} from "../problem-submission/problem-submission.model";
+import {STATUSES, Submission} from "../problem-submission/problem-submission.model";
 import {SubmissionTest} from "./problem-test.model";
 import * as fromStudent from "../student.reducer";
 import {Subscription} from "rxjs";
@@ -12,11 +12,13 @@ import {Subscription} from "rxjs";
   selector: 'app-student-submission',
   templateUrl: './problem-test.component.html',
 })
+
 export class ProblemTestComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription
   id: number
   submission: Submission
   submissionTests: SubmissionTest[]
+  statusMap = STATUSES.INIT
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +45,9 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     ).subscribe(submissionState => {
       this.submission = submissionState.submission
       this.submissionTests = submissionState.submissionTests
+      if (this.submission.status) {
+        this.statusMap = STATUSES[this.submission.status]
+      }
     })
   }
 
@@ -50,3 +55,6 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe()
   }
 }
+
+
+

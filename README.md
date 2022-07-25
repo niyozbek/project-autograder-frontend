@@ -1,7 +1,7 @@
 # TODO LIST
-1. code submission, code editor https://www.npmjs.com/package/ngx-monaco-editor
-2. get runtimes pass to problem submission
-3. progress bar
+1. get runtimes pass to problem submission and make it selective instead of typing
+2. progress bar
+3. submission status show (lecturer)
 
 # Auto Grader
 
