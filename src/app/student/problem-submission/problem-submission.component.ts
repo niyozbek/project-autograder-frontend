@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {map, switchMap} from 'rxjs/operators';
@@ -6,12 +6,14 @@ import * as SubmissionActions from './problem-submission.actions';
 import {PageEvent} from "@angular/material/paginator";
 import {Submission} from "./problem-submission.model";
 import * as fromStudent from "../student.reducer";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-student-problem-submission',
   templateUrl: './problem-submission.component.html'
 })
-export class ProblemSubmissionComponent implements OnInit {
+export class ProblemSubmissionComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription
   problemId: number
   submissions: Submission[]
 
@@ -23,7 +25,7 @@ export class ProblemSubmissionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
+    this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),
@@ -51,5 +53,9 @@ export class ProblemSubmissionComponent implements OnInit {
       pageIndex: $event.pageIndex,
       pageSize: $event.pageSize
     }))
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 }

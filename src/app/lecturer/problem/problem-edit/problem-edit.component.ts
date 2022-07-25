@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {map, switchMap} from 'rxjs/operators';
@@ -6,12 +6,14 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import * as ProblemActions from '../problem.actions';
 import {Problem} from "../problem.model";
 import * as fromLecturer from "../../lecturer.reducer";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lecturer-problem-edit',
   templateUrl: './problem-edit.component.html',
 })
-export class ProblemEditComponent implements OnInit {
+export class ProblemEditComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription
   problem: Problem
 
   id: number
@@ -28,7 +30,7 @@ export class ProblemEditComponent implements OnInit {
 
   ngOnInit(): void {
     // set this.problem by id from state.problems
-    this.route.params.pipe(
+    this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),
@@ -89,5 +91,9 @@ export class ProblemEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 }

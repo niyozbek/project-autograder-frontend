@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as fromLecturer from '../../lecturer.reducer'
@@ -6,12 +6,14 @@ import {map, switchMap} from 'rxjs/operators';
 import * as TestCaseActions from '../../test-case/test-case.actions';
 import {PageEvent} from "@angular/material/paginator";
 import {TestCase} from "../../test-case/test-case.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lecturer-problem-test-case',
   templateUrl: './problem-test-case.component.html'
 })
-export class ProblemTestCaseComponent implements OnInit {
+export class ProblemTestCaseComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription
   problemId: number
   testCases: TestCase[]
 
@@ -23,7 +25,7 @@ export class ProblemTestCaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
+    this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),
@@ -51,5 +53,9 @@ export class ProblemTestCaseComponent implements OnInit {
       pageIndex: $event.pageIndex,
       pageSize: $event.pageSize
     }))
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 }

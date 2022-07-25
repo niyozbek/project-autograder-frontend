@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromLecturer from "../lecturer.reducer";
 import * as SubmissionActions from './submission.actions';
@@ -6,12 +6,14 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
 import {Submission} from "./submission.model";
 import {SubmissionTest} from "./submission-test.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lecturer-submission',
   templateUrl: './submission.component.html',
 })
-export class SubmissionComponent implements OnInit {
+export class SubmissionComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription
   id: number
   submission: Submission
   submissionTests: SubmissionTest[]
@@ -24,7 +26,7 @@ export class SubmissionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
+    this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),
@@ -42,5 +44,9 @@ export class SubmissionComponent implements OnInit {
       this.submission = submissionState.submission
       this.submissionTests = submissionState.submissionTests
     })
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 }

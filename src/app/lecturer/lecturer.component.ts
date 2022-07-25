@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, take} from "rxjs/operators";
 import {Store} from "@ngrx/store";
 import * as fromLecturer from "./lecturer.reducer";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lecturer',
   templateUrl: './lecturer.component.html',
 })
-export class LecturerComponent implements OnInit {
+export class LecturerComponent implements OnInit, OnDestroy {
+  authStateSubscription: Subscription
 
   user: {
     username: string
@@ -19,7 +21,7 @@ export class LecturerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select('auth')
+    this.authStateSubscription = this.store.select('auth')
       .pipe(
         take(1),
         map(authState => authState.user)
@@ -29,5 +31,9 @@ export class LecturerComponent implements OnInit {
           username: user.username
         }
       })
+  }
+
+  ngOnDestroy(): void {
+    this.authStateSubscription.unsubscribe()
   }
 }

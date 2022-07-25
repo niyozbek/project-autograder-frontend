@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../user/user.model";
 import {Store} from "@ngrx/store";
 import * as UserActions from '../user/user.actions';
 import {PageEvent} from "@angular/material/paginator";
 import * as fromAdmin from "../admin.reducer";
 import {map} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-admin-lecturer',
   templateUrl: './lecturer.component.html'
 })
 
-export class LecturerComponent implements OnInit {
+export class LecturerComponent implements OnInit, OnDestroy {
   lecturers: User[]
+  adminStateSubscription: Subscription
 
   constructor(
     private store: Store<fromAdmin.State>
@@ -20,7 +22,7 @@ export class LecturerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select('admin')
+    this.adminStateSubscription = this.store.select('admin')
       .pipe(
         map(adminState => adminState.users)
       ).subscribe(users => {
@@ -38,6 +40,10 @@ export class LecturerComponent implements OnInit {
       pageIndex: $event.pageIndex,
       pageSize: $event.pageSize
     }))
+  }
+
+  ngOnDestroy(): void {
+    this.adminStateSubscription.unsubscribe()
   }
 
 }

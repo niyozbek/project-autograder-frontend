@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {map} from 'rxjs/operators';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import * as TestCaseActions from '../../../test-case/test-case.actions';
 import * as fromLecturer from "../../../lecturer.reducer";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lecturer-problem-test-case-edit',
   templateUrl: './problem-test-case-edit.component.html'
 })
-export class ProblemTestCaseEditComponent implements OnInit {
+export class ProblemTestCaseEditComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription
   problemId: number
   testCaseForm: FormGroup
 
@@ -22,7 +24,7 @@ export class ProblemTestCaseEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.parent.params.pipe(
+    this.routeSubscription = this.route.parent.params.pipe(
       map(params => {
         return +params['id']
       }),
@@ -49,5 +51,9 @@ export class ProblemTestCaseEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 }
