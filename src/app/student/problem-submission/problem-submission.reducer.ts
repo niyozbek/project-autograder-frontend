@@ -50,7 +50,7 @@ export function problemSubmissionReducer(
 
       return {
         ...state,
-        submissions:  [...state.submissions, action.payload],
+        submissions:  [action.payload, ...state.submissions],
         submission: action.payload
       }
     case SubmissionActions.GET_SUBMISSION_TESTS:

@@ -12,7 +12,7 @@ export interface State {
 
 const initialState: State = {
   problems: [],
-  problem: new Problem()
+  problem: new Problem(),
 }
 
 export function problemReducer(
@@ -46,12 +46,13 @@ export function problemReducer(
 
       return {
         ...state,
-        problems: [...state.problems, action.payload]
+        problems: [action.payload, ...state.problems]
       }
     }
     case ProblemActions.UPDATE_PROBLEM: {
       let index = state.problems.findIndex((problem) => problem.id === action.payload.id)
 
+      // merge old<-new
       const updatedProblem = {
         ...state.problems[index],
         ...action.payload.newProblem
@@ -79,6 +80,7 @@ export function problemReducer(
         ...state,
         problem: new Problem()
       }
+
     default:
       return state
   }

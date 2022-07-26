@@ -1,7 +1,6 @@
 # TODO LIST
-1. get runtimes pass to problem submission and make it selective instead of typing
+1. submission status show (lecturer)
 2. progress bar
-3. submission status show (lecturer)
 
 # Auto Grader
 

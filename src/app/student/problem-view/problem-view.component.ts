@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import * as ProblemActions from '../problem/problem.actions'
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {Runtime} from '../problem/runtime.model';
+import {Submission} from "../problem-submission/problem-submission.model";
 
 @Component({
   selector: 'app-student-problem-view',
@@ -20,6 +22,8 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
 
   // monaco-editor-settings
   editorOptions = {theme: 'vs-dark', language: 'java'};
+  runtimes: Runtime[];
+  runtimeIndex: number
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +40,7 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
       switchMap(id => {
         this.problemId = id
         this.store.dispatch(new ProblemActions.GetProblemDetail({problemId: this.problemId}))
+        this.store.dispatch(new ProblemActions.GetRuntimes({problemId: this.problemId}))
 
         return this.store.select('student')
       }),
@@ -44,6 +49,7 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
       })
     ).subscribe(problems => {
       this.problem = problems.problem
+      this.runtimes = problems.runtimes
     })
 
     this.initForm()
@@ -52,16 +58,22 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
   private initForm() {
     this.submissionForm = new FormGroup({
       language: new FormControl('', Validators.required),
-      version: new FormControl('', Validators.required),
+      version: new FormControl({value: '', disabled: true}, Validators.required),
       filename: new FormControl('', Validators.required),
       code: new FormControl('', Validators.required)
     })
   }
 
   onSubmit() {
+    const submission = new Submission();
+    submission.code = this.submissionForm.value.code;
+    submission.filename = this.submissionForm.value.filename;
+    submission.language = this.runtimes[this.runtimeIndex].language;
+    submission.version = this.runtimes[this.runtimeIndex].version;
+
     this.store.dispatch(new ProblemActions.SubmitSolution({
       problemId: this.problemId,
-      newSubmission: this.submissionForm.value
+      newSubmission: submission
     }))
     this.router.navigate(['./submission'], {queryParams: {problemId: this.problemId}, relativeTo: this.route})
   }
@@ -70,7 +82,9 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe()
   }
 
-  valueChange(language: string) {
-    this.editorOptions.language = language
+  valueChange(runtimeIndex: number) {
+    this.runtimeIndex = runtimeIndex
+    this.editorOptions.language = this.runtimes[runtimeIndex].language
+    this.submissionForm.get('version').setValue(this.runtimes[runtimeIndex].version)
   }
 }

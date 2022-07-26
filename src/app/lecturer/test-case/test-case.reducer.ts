@@ -46,7 +46,7 @@ export function testCaseReducer(
 
       return {
         ...state,
-        testCases: [...state.testCases, action.payload]
+        testCases: [action.payload, ...state.testCases]
       }
     }
     default:

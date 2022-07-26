@@ -6,6 +6,7 @@ import * as ProblemActions from './problem.actions'
 import * as SubmissionActions from '../problem-submission/problem-submission.actions'
 import {Problem} from "./problem.model";
 import {Submission} from "../problem-submission/problem-submission.model";
+import {Runtime} from "./runtime.model";
 
 @Injectable()
 export class ProblemEffects {
@@ -62,6 +63,20 @@ export class ProblemEffects {
     }),
     map(submission => {
       return new SubmissionActions.LoadSubmission(submission)
+    })
+  )
+
+  @Effect()
+  getRuntimes = this.actions$.pipe(
+    ofType(ProblemActions.GET_RUNTIMES),
+    switchMap((params: ProblemActions.GetRuntimes) => {
+      return this.http
+        .get<Runtime[]>(
+          this.apiUrl + 'problem/' + params.payload.problemId + '/runtime'
+        )
+    }),
+    map(runtimes => {
+      return new ProblemActions.LoadRuntimes(runtimes)
     })
   )
 

@@ -10,6 +10,7 @@ export const GET_PROBLEM_DETAIL = '[Problems] Get Problem Detail'
 export const LOAD_PROBLEM_DETAIL = '[Problems] Load Problem Detail'
 export const CLEAR_PROBLEM_DETAIL = '[Problems] Clear Problem Detail'
 
+
 export class GetProblems implements Action {
   readonly type = GET_PROBLEMS
 
@@ -66,7 +67,6 @@ export class ClearProblemDetail implements Action {
   }
 }
 
-
 export type ProblemActions =
   GetProblems
   | LoadProblems
@@ -76,3 +76,4 @@ export type ProblemActions =
   | GetProblemDetail
   | LoadProblemDetail
   | ClearProblemDetail
+

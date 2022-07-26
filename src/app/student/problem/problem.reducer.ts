@@ -1,5 +1,6 @@
 import * as ProblemActions from './problem.actions'
 import {Problem} from "./problem.model";
+import {Runtime} from "./runtime.model";
 
 export interface AppState {
   problems: State
@@ -8,11 +9,13 @@ export interface AppState {
 export interface State {
   problems: Problem[]
   problem: Problem
+  runtimes: Runtime[]
 }
 
 const initialState: State = {
   problems: [],
-  problem: new Problem()
+  problem: new Problem(),
+  runtimes: []
 }
 
 export function problemReducer(
@@ -46,6 +49,15 @@ export function problemReducer(
     case ProblemActions.SUBMIT_SOLUTION:
       return {
         ...state
+      }
+    case ProblemActions.GET_RUNTIMES:
+      return {
+        ...state
+      }
+    case ProblemActions.LOAD_RUNTIMES:
+      return {
+        ...state,
+        runtimes: [...action.payload]
       }
     default:
       return state

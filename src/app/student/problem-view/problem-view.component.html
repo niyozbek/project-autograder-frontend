@@ -11,13 +11,15 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="language">Language</label>
-            <input
-              type="text"
-              id="language"
-              class="form-control"
-              formControlName="language"
-              (ngModelChange)="valueChange($event)"
+            <select id="language"
+                    class="form-control"
+                    formControlName="language"
+                    (ngModelChange)="valueChange($event)"
             >
+              <option *ngFor="let runtime of runtimes; let i = index" value="{{i}}">
+                {{runtime.language}}
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-md-4">

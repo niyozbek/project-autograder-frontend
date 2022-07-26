@@ -36,7 +36,7 @@ export function userReducer(
     case UserActions.LOAD_LECTURER:
       return {
         ...state,
-        lecturers: [...state.lecturers, action.payload]
+        lecturers: [action.payload, ...state.lecturers]
       }
     case UserActions.GET_STUDENTS:
       return {
@@ -54,7 +54,7 @@ export function userReducer(
     case UserActions.LOAD_STUDENT:
       return {
         ...state,
-        students: [...state.students, action.payload]
+        students: [action.payload, ...state.students]
       }
     default:
       return state
