@@ -1,6 +1,5 @@
 # TODO LIST
-1. submission status show (lecturer)
-2. progress bar
+1. progress bar while running tests
 
 # Auto Grader
 
