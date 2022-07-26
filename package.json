@@ -1,5 +1,5 @@
 {
-  "name": "my-second-app",
+  "name": "autograding-web-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run my-second-app:serve-ssr",
-    "serve:ssr": "node dist/my-second-app/server/main.js",
-    "build:ssr": "ng build && ng run my-second-app:server",
-    "prerender": "ng run my-second-app:prerender"
+    "dev:ssr": "ng run autograding-web-app:serve-ssr",
+    "serve:ssr": "node dist/autograding-web-app/server/main.js",
+    "build:ssr": "ng build && ng run autograding-web-app:server",
+    "prerender": "ng run autograding-web-app:prerender"
   },
   "private": true,
   "dependencies": {
