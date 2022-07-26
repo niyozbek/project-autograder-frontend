@@ -7,6 +7,7 @@ import {map, switchMap} from "rxjs/operators";
 import {Submission} from "./submission.model";
 import {SubmissionTest} from "./submission-test.model";
 import {Subscription} from "rxjs";
+import {STATUSES} from "../../student/problem-submission/problem-submission.model";
 
 @Component({
   selector: 'app-lecturer-submission',
@@ -17,6 +18,7 @@ export class SubmissionComponent implements OnInit, OnDestroy {
   id: number
   submission: Submission
   submissionTests: SubmissionTest[]
+  statusMap = STATUSES.INIT
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +44,9 @@ export class SubmissionComponent implements OnInit, OnDestroy {
       })
     ).subscribe(submissionState => {
       this.submission = submissionState.submission
+      if (this.submission.status) {
+        this.statusMap = STATUSES[this.submission.status]
+      }
       this.submissionTests = submissionState.submissionTests
     })
   }

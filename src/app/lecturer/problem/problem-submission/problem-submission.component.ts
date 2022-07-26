@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {map, switchMap} from 'rxjs/operators';
 import * as SubmissionActions from '../../submission/submission.actions';
 import {PageEvent} from "@angular/material/paginator";
-import {Submission} from "../../submission/submission.model";
+import {STATUSES, StatusMap, Submission} from "../../submission/submission.model";
 import * as fromLecturer from "../../lecturer.reducer";
 import {Subscription} from "rxjs";
 
@@ -16,6 +16,7 @@ export class ProblemSubmissionComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription
   problemId: number
   submissions: Submission[]
+  statusMaps: StatusMap[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +45,9 @@ export class ProblemSubmissionComponent implements OnInit, OnDestroy {
       })
     ).subscribe(submissions => {
       this.submissions = submissions.submissions
+      this.submissions.forEach((submission, index) => {
+        this.statusMaps[index] = STATUSES[submission.status]
+      })
     })
   }
 
