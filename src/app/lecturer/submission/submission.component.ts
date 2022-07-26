@@ -4,10 +4,9 @@ import * as fromLecturer from "../lecturer.reducer";
 import * as SubmissionActions from './submission.actions';
 import {ActivatedRoute, Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
-import {Submission} from "./submission.model";
+import {STATUSES, Submission} from "./submission.model";
 import {SubmissionTest} from "./submission-test.model";
 import {Subscription} from "rxjs";
-import {STATUSES} from "../../student/problem-submission/problem-submission.model";
 
 @Component({
   selector: 'app-lecturer-submission',

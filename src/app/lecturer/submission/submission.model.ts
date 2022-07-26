@@ -15,9 +15,10 @@ export interface StatusMap {
 
 export const STATUSES: { [key: string]: StatusMap } = {
   INIT: {label: '', labelStyle: ''},
-  NEW: {label: 'New', labelStyle: 'label label-primary'},
-  WRONG_ANSWER: {label: 'Wrong Answer', labelStyle: 'label label-warning'},
-  COMPILE_ERROR: {label: 'Compilation Error', labelStyle: 'label label-danger'},
-  ACCEPTED: {label: 'Accepted', labelStyle: 'label label-success'}
+  NEW: {label: 'New', labelStyle: 'badge badge-primary'},
+  WRONG_ANSWER: {label: 'Wrong Answer', labelStyle: 'badge badge-warning'},
+  COMPILE_ERROR: {label: 'Compilation Error', labelStyle: 'badge badge-danger'},
+  ACCEPTED: {label: 'Accepted', labelStyle: 'badge badge-success'}
 }
+
 

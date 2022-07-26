@@ -1,22 +1,23 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand">Auto Grader</a>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    Auto Grader
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && isAdmin"><a class="nav-link" href="#" routerLink="/admin">Admin</a></li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && isLecturer"><a class="nav-link" href="#" routerLink="/lecturer">Lecturer</a></li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated && isStudent"><a class="nav-link" href="#" routerLink="/student">Student</a></li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated"><a class="nav-link" href="#" routerLink="/auth">Authenticate</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
 
-        <div class="navbar-default">
-            <ul class="nav navbar-nav">
-
-                <li routerLinkActive="active" *ngIf="isAuthenticated && isAdmin"><a href="#" routerLink="/admin">Admin</a></li>
-                <li routerLinkActive="active" *ngIf="isAuthenticated && isLecturer"><a href="#" routerLink="/lecturer">Lecturer</a></li>
-                <li routerLinkActive="active" *ngIf="isAuthenticated && isStudent"><a href="#" routerLink="/student">Student</a></li>
-                <li routerLinkActive="active" *ngIf="!isAuthenticated"><a href="#" routerLink="/auth">Authenticate</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="isAuthenticated">
-                  <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+  </div>
 </nav>

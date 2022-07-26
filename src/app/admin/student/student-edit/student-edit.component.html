@@ -4,7 +4,7 @@
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
 
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <div class="form-group">
             <label for="username">Username</label>
             <input
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <div class="form-group">
             <label for="password">Password</label>
             <input
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <button type="submit" class="btn btn-success" [disabled]="!studentForm.valid">Save</button>
           <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
         </div>
