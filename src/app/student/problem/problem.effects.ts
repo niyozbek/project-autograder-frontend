@@ -62,7 +62,7 @@ export class ProblemEffects {
         )
     }),
     map(submission => {
-      return new SubmissionActions.LoadSubmission(submission)
+      return new SubmissionActions.LoadSubmissionWindow(submission)
     })
   )
 

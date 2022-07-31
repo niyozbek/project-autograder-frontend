@@ -15,6 +15,7 @@ import {ProblemSubmissionComponent} from "./problem-submission/problem-submissio
 import {ProblemSubmissionEffects} from "./problem-submission/problem-submission.effects";
 import {ProblemTestComponent} from "./problem-test/problem-test.component";
 import {MonacoEditorModule} from "ngx-monaco-editor";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MonacoEditorModule} from "ngx-monaco-editor";
         MatPaginatorModule,
         StoreModule.forFeature('student', fromStudent.reducers),
         EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects]),
-        MonacoEditorModule.forRoot()
+        MonacoEditorModule.forRoot(),
+        MatProgressBarModule
     ],
 })
 export class StudentModule {

@@ -6,6 +6,7 @@ export const GET_SUBMISSIONS = '[Student Submissions] Get Submissions'
 export const LOAD_SUBMISSIONS = '[Student Submissions] Load Submissions'
 export const GET_SUBMISSION = '[Student Submissions] Get Submission'
 export const LOAD_SUBMISSION = '[Student Submissions] Load Submission'
+export const LOAD_SUBMISSION_WINDOW = '[Student Submissions] Load Submission Window'
 export const GET_SUBMISSION_TESTS = '[Student Submissions] Get Submission Tests'
 export const LOAD_SUBMISSION_TESTS = '[Student Submissions] Load Submission Tests'
 
@@ -37,6 +38,14 @@ export class LoadSubmission implements Action {
   }
 }
 
+
+export class LoadSubmissionWindow implements Action {
+  readonly type = LOAD_SUBMISSION_WINDOW
+
+  constructor(public payload: Submission) {
+  }
+}
+
 export class GetSubmissionTests implements Action {
   readonly type = GET_SUBMISSION_TESTS
 
@@ -58,3 +67,4 @@ export type ProblemSubmissionActions =
   | LoadSubmission
   | GetSubmissionTests
   | LoadSubmissionTests
+  | LoadSubmissionWindow

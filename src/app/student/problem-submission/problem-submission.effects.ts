@@ -1,10 +1,12 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 import {Actions, Effect, ofType} from '@ngrx/effects'
-import {map, switchMap} from 'rxjs/operators'
+import {map, switchMap, tap} from 'rxjs/operators'
 import * as SubmissionAction from './problem-submission.actions'
 import {Submission} from "./problem-submission.model";
 import {SubmissionTest} from "../problem-test/problem-test.model";
+import * as SubmissionActions from "./problem-submission.actions";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ProblemSubmissionEffects {
@@ -59,9 +61,18 @@ export class ProblemSubmissionEffects {
     })
   )
 
+  @Effect({ dispatch: false })
+  loadSubmissionWindow = this.actions$.pipe(
+    ofType(SubmissionActions.LOAD_SUBMISSION_WINDOW),
+    tap((params: SubmissionActions.LoadSubmissionWindow) => {
+      this.router.navigate(['/student/submission/'+params.payload.id])
+    })
+  )
+
   constructor(
     private actions$: Actions,
     private http: HttpClient,
+    private router: Router,
   ) {
   }
 }

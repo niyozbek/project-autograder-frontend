@@ -75,7 +75,6 @@ export class ProblemViewComponent implements OnInit, OnDestroy {
       problemId: this.problemId,
       newSubmission: submission
     }))
-    this.router.navigate(['./submission'], {queryParams: {problemId: this.problemId}, relativeTo: this.route})
   }
 
   ngOnDestroy(): void {

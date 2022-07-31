@@ -33,6 +33,12 @@
         <td>Status</td>
         <td><span style="font-size: 14px" class="{{this.statusMap.labelStyle}}">{{this.statusMap.label}}</span></td>
       </tr>
+      <tr>
+        <td>Test Cases Processed</td>
+        <td>
+            <mat-progress-bar mode="determinate" value="{{progress}}"></mat-progress-bar>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
