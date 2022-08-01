@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
 import {Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import {TestResultModel} from "./test-result.model";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-student-submission',
@@ -24,11 +25,9 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
   submissionTests: SubmissionTest[]
   statusMap = STATUSES.INIT
   webSocketClient
+  // eventually every submission will have progress=100 even though status might be various
   progress = 0
   progressInterval
-  // if three times progress is not updated, decide that it got stuck (WRONG_ANSWER||COMP_ERROR)
-  progressRequestsInitial = 15
-  progressRequests = this.progressRequestsInitial
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +35,8 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     private store: Store<fromStudent.State>
   ) {
   }
+
+  color: ThemePalette = 'primary';
 
   ngOnInit(): void {
     this.routeSubscription = this.route.params.pipe(
@@ -54,13 +55,14 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
         const submissionState = studentState.submissions
         this.submission = submissionState.submission
         this.submissionTests = submissionState.submissionTests
-        if (this.submission.status) {
-          this.statusMap = STATUSES[this.submission.status]
-        }
+        this.statusMap = STATUSES[this.submission.status]
       })
   }
 
   connectToWebSocket() {
+    if (this.webSocketClient != null) {
+      return
+    }
     const socket = new SockJS('http://localhost:8080/gs-guide-websocket');
     this.webSocketClient = Stomp.over(socket);
 
@@ -70,9 +72,11 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
       _this.webSocketClient.subscribe('/topic/test-results', function (testResult) {
         _this.showProgress(JSON.parse(testResult.body));
         // progressRequest is needed so that code stops in case submission gets stuck
-        if (_this.progress == 100 || _this.progressRequests < 1) {
-          console.log('stopped')
+        if (_this.progress == 100) {
+          _this.color = 'accent'
           clearInterval(_this.progressInterval)
+          _this.store.dispatch(new SubmissionActions.GetSubmission({submissionId: _this.id}))
+          _this.store.dispatch(new SubmissionActions.GetSubmissionTests({submissionId: _this.id}))
         }
       });
       // update every 1000 seconds
@@ -100,14 +104,7 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
 
   showProgress(testResultModel: TestResultModel) {
     console.log(testResultModel)
-    const newProgress = testResultModel.processedTestCases / testResultModel.totalTestCases * 100
-    if (this.progress === newProgress) {
-      this.progressRequests -= 1;
-    } else {
-      // reset
-      this.progressRequests = this.progressRequestsInitial
-    }
-    this.progress = newProgress
+    this.progress = testResultModel.processedTestCases / testResultModel.totalTestCases * 100
   }
 
   ngOnDestroy(): void {

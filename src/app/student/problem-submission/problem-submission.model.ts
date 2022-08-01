@@ -5,8 +5,7 @@ export class Submission {
   public version: string
   public filename: string
   public code: string
-  public status: string
-  public statusMap = STATUSES.INIT
+  public status: string = 'INIT'
 }
 
 export interface StatusMap {
