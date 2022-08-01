@@ -26,8 +26,10 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
   statusMap = STATUSES.INIT
   webSocketClient
   // eventually every submission will have progress=100 even though status might be various
+  testResult: TestResultModel
   progress = 0
   progressInterval
+  color: ThemePalette = 'primary';
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +38,6 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  color: ThemePalette = 'primary';
 
   ngOnInit(): void {
     this.routeSubscription = this.route.params.pipe(
@@ -70,9 +71,10 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     this.webSocketClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       _this.webSocketClient.subscribe('/topic/test-results', function (testResult) {
-        _this.showProgress(JSON.parse(testResult.body));
+        _this.testResult = JSON.parse(testResult.body)
+        _this.showProgress();
         // progressRequest is needed so that code stops in case submission gets stuck
-        if (_this.progress == 100) {
+        if (_this.testResult.status == 'COMPLETED') {
           _this.color = 'accent'
           clearInterval(_this.progressInterval)
           _this.store.dispatch(new SubmissionActions.GetSubmission({submissionId: _this.id}))
@@ -102,9 +104,9 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     );
   }
 
-  showProgress(testResultModel: TestResultModel) {
-    console.log(testResultModel)
-    this.progress = testResultModel.processedTestCases / testResultModel.totalTestCases * 100
+  showProgress() {
+    // console.log(testResultModel)
+    this.progress = this.testResult.processedTestCases / this.testResult.totalTestCases * 100
   }
 
   ngOnDestroy(): void {
