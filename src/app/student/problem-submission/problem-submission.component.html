@@ -10,6 +10,7 @@
         <th>Version</th>
         <th>FileName</th>
         <th>Status</th>
+        <th>Grade</th>
         <th></th>
       </tr>
       </thead>
@@ -21,6 +22,7 @@
         <td>{{submission.version}} </td>
         <td>{{submission.filename}} </td>
         <td><span style="font-size: 14px" class="{{statusMaps[i].labelStyle}}">{{statusMaps[i].label}}</span> </td>
+        <td>{{submission.grade}} </td>
         <td><a class="btn btn-info" href="#" routerLink="/student/submission/{{submission.id}}">Details</a></td>
       </tr>
       </tbody>
