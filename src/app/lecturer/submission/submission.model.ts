@@ -7,6 +7,7 @@ export class Submission {
   public studentId: number
   public code: string
   public status: string;
+  public grade: number
 }
 export interface StatusMap {
   label: string,
