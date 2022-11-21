@@ -4,10 +4,11 @@ import {Actions, Effect, ofType} from '@ngrx/effects'
 import {map, switchMap} from 'rxjs/operators'
 import * as TestCaseActions from './test-case.actions'
 import {TestCase} from "./test-case.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class TestCaseEffects {
-  apiUrl = 'http://localhost:8080/api/lecturer/'
+  apiUrl = environment.apiUrl + '/api/lecturer/'
 
   @Effect()
   getTestCases = this.actions$.pipe(

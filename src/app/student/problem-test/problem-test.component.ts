@@ -11,6 +11,7 @@ import {Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import {TestResultModel} from "./test-result.model";
 import {ThemePalette} from "@angular/material/core";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-student-submission',
@@ -64,7 +65,7 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     if (this.webSocketClient != null) {
       return
     }
-    const socket = new SockJS('http://localhost:8080/gs-guide-websocket');
+    const socket = new SockJS(environment.apiUrl + '/gs-guide-websocket');
     this.webSocketClient = Stomp.over(socket);
 
     const _this = this;

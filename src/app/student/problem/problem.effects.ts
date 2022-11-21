@@ -7,10 +7,11 @@ import * as SubmissionActions from '../problem-submission/problem-submission.act
 import {Problem} from "./problem.model";
 import {Submission} from "../problem-submission/problem-submission.model";
 import {Runtime} from "./runtime.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProblemEffects {
-  apiUrl = 'http://localhost:8080/api/student/'
+  apiUrl = environment.apiUrl + '/api/student/'
 
   @Effect()
   getProblems = this.actions$.pipe(

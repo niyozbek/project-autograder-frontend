@@ -7,10 +7,11 @@ import {Submission} from "./problem-submission.model";
 import {SubmissionTest} from "../problem-test/problem-test.model";
 import * as SubmissionActions from "./problem-submission.actions";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProblemSubmissionEffects {
-  apiUrl = 'http://localhost:8080/api/student/'
+  apiUrl = environment.apiUrl + '/api/student/'
 
   @Effect()
   getSubmissionsByProblemId = this.actions$.pipe(

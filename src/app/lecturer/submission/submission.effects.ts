@@ -5,10 +5,11 @@ import {map, switchMap} from 'rxjs/operators'
 import * as SubmissionAction from './submission.actions'
 import {Submission} from "./submission.model";
 import {SubmissionTest} from "./submission-test.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class SubmissionEffects {
-  apiUrl = 'http://localhost:8080/api/lecturer/'
+  apiUrl = environment.apiUrl + '/api/lecturer/'
 
   @Effect()
   getSubmissionsByProblemId = this.actions$.pipe(

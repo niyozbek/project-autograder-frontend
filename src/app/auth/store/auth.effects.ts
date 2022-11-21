@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service'
 import { AuthUser } from '../auth-user.model'
 
 import * as AuthActions from './auth.actions'
+import {environment} from "../../../environments/environment";
 
 export interface AuthResponseData {
   username: string,
@@ -58,7 +59,7 @@ const handleError = (errorResponse) => {
 
 @Injectable()
 export class AuthEffects {
-  apiUrl = 'http://localhost:8080/auth/'
+  apiUrl = environment.apiUrl + '/auth/'
 
   // this authLogin observable should never die, therefore never throw error
   @Effect()
