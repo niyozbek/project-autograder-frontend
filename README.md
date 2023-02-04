@@ -4,7 +4,7 @@
 # Auto Grader
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
-Use Node 12.22.12
+Use Node 12.14.1
 
 ## Development server
 
