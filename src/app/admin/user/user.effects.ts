@@ -8,7 +8,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class UserEffects {
-  apiUrl = environment.apiUrl + '/api/admin/'
+  apiUrl = environment.apiUrl + '/api'
 
   @Effect()
   getLecturers = this.actions$.pipe(
@@ -16,7 +16,7 @@ export class UserEffects {
     switchMap((params: UserActions.GetLecturers) => {
       return this.http
         .get<User[]>(
-          this.apiUrl + 'lecturer',
+          this.apiUrl + '/lecturers',
           {
             params: {
               pageNo: params.payload.pageIndex,
@@ -36,7 +36,7 @@ export class UserEffects {
     switchMap((body: UserActions.CreateLecturer) => {
       return this.http
         .post<User>(
-          this.apiUrl + 'lecturer',
+          this.apiUrl + '/lecturers',
           {
             'username': body.payload.username,
             'password': body.payload.password
@@ -54,7 +54,7 @@ export class UserEffects {
     switchMap((params: UserActions.GetLecturers) => {
       return this.http
         .get<User[]>(
-          this.apiUrl + 'student',
+          this.apiUrl + '/students',
           {
             params: {
               pageNo: params.payload.pageIndex,
@@ -74,7 +74,7 @@ export class UserEffects {
     switchMap((body: UserActions.CreateStudent) => {
       return this.http
         .post<User>(
-          this.apiUrl + 'student',
+          this.apiUrl + '/students',
           {
             'username': body.payload.username,
             'password': body.payload.password

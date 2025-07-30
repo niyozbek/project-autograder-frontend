@@ -8,7 +8,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class TestCaseEffects {
-  apiUrl = environment.apiUrl + '/api/lecturer/'
+  apiUrl = environment.apiUrl + '/api/test-cases'
 
   @Effect()
   getTestCases = this.actions$.pipe(
@@ -16,9 +16,10 @@ export class TestCaseEffects {
     switchMap((params: TestCaseActions.GetTestCases) => {
       return this.http
         .get<TestCase[]>(
-          this.apiUrl + 'problem/' + params.payload.problemId + '/test-case',
+          this.apiUrl,
           {
             params: {
+              problemId: params.payload.problemId,
               pageNo: params.payload.pageIndex,
               pageSize: params.payload.pageSize
             }
@@ -36,8 +37,9 @@ export class TestCaseEffects {
     switchMap((params: TestCaseActions.AddTestCase) => {
       return this.http
         .post<TestCase>(
-          this.apiUrl + 'problem/' + params.payload.problemId + '/test-case',
+          this.apiUrl,
           {
+            'problemId': params.payload.problemId,
             'input': params.payload.newTestCase.input,
             'expectedOutput': params.payload.newTestCase.expectedOutput
           }

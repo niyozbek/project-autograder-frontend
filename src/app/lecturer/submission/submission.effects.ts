@@ -9,7 +9,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class SubmissionEffects {
-  apiUrl = environment.apiUrl + '/api/lecturer/'
+  apiUrl = environment.apiUrl + '/api/submissions'
 
   @Effect()
   getSubmissionsByProblemId = this.actions$.pipe(
@@ -17,9 +17,10 @@ export class SubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmissionsByProblemId) => {
       return this.http
         .get<Submission[]>(
-          this.apiUrl + 'problem/' + params.payload.problemId + '/submission',
+          this.apiUrl,
           {
             params: {
+              problemId: params.payload.problemId,
               pageNo: params.payload.pageIndex,
               pageSize: params.payload.pageSize
             }
@@ -37,7 +38,7 @@ export class SubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmission) => {
       return this.http
         .get<Submission>(
-          this.apiUrl + 'submission/' + params.payload.submissionId
+          this.apiUrl + '/' + params.payload.submissionId
         )
     }),
     map(submission => {
@@ -51,7 +52,7 @@ export class SubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmissionTests) => {
       return this.http
         .get<SubmissionTest[]>(
-          this.apiUrl + 'submission/' + params.payload.submissionId + '/detail'
+          this.apiUrl + '/' +params.payload.submissionId + '/detail'
         )
     }),
     map(submissionTests => {

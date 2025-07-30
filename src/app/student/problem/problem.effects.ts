@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProblemEffects {
-  apiUrl = environment.apiUrl + '/api/student/'
+  apiUrl = environment.apiUrl + '/api'
 
   @Effect()
   getProblems = this.actions$.pipe(
@@ -19,7 +19,7 @@ export class ProblemEffects {
     switchMap((params: ProblemActions.GetProblems) => {
       return this.http
         .get<Problem[]>(
-          this.apiUrl + 'problem',
+          this.apiUrl + '/problems',
           {
             params: {
               pageNo: params.payload.pageIndex,
@@ -39,7 +39,7 @@ export class ProblemEffects {
     switchMap((params: ProblemActions.GetProblemDetail) => {
       return this.http
         .get<Problem>(
-          this.apiUrl + 'problem/' + params.payload.problemId
+          this.apiUrl + '/problems/' + params.payload.problemId
         )
     }),
     map(problem => {
@@ -53,8 +53,9 @@ export class ProblemEffects {
     switchMap((params: ProblemActions.SubmitSolution) => {
       return this.http
         .post<Submission>(
-          this.apiUrl + 'problem/' + params.payload.problemId + '/submit',
+          this.apiUrl + '/submissions',
           {
+            problemId: params.payload.problemId,
             language: params.payload.newSubmission.language,
             version: params.payload.newSubmission.version,
             filename: params.payload.newSubmission.filename,
@@ -73,7 +74,7 @@ export class ProblemEffects {
     switchMap((params: ProblemActions.GetRuntimes) => {
       return this.http
         .get<Runtime[]>(
-          this.apiUrl + 'problem/' + params.payload.problemId + '/runtime'
+          this.apiUrl + '/problems/runtimes'
         )
     }),
     map(runtimes => {

@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProblemSubmissionEffects {
-  apiUrl = environment.apiUrl + '/api/student/'
+  apiUrl = environment.apiUrl + '/api/submissions/own'
 
   @Effect()
   getSubmissionsByProblemId = this.actions$.pipe(
@@ -19,7 +19,7 @@ export class ProblemSubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmissions) => {
       return this.http
         .get<Submission[]>(
-          this.apiUrl + 'submission',
+          this.apiUrl,
           {
             params: {
               problemId: params.payload.problemId,
@@ -40,7 +40,7 @@ export class ProblemSubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmission) => {
       return this.http
         .get<Submission>(
-          this.apiUrl + 'submission/' + params.payload.submissionId
+          this.apiUrl + '/' + params.payload.submissionId,
         )
     }),
     map(submission => {
@@ -54,7 +54,7 @@ export class ProblemSubmissionEffects {
     switchMap((params: SubmissionAction.GetSubmissionTests) => {
       return this.http
         .get<SubmissionTest[]>(
-          this.apiUrl + 'submission/' + params.payload.submissionId + '/detail'
+          this.apiUrl + '/' + params.payload.submissionId + '/detail'
         )
     }),
     map(submissionTests => {
