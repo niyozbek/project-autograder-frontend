@@ -6,13 +6,17 @@ export interface AppState {
 }
 
 export interface State {
+  users: User[];
   lecturers: User[],
-  students: User[]
+  students: User[],
+  user: User
 }
 
 const initialState: State = {
   lecturers: [],
-  students: []
+  students: [],
+  users: [],
+  user: new User(),
 }
 
 export function userReducer(
@@ -56,6 +60,39 @@ export function userReducer(
         ...state,
         students: [action.payload, ...state.students]
       }
+    case UserActions.GET_USERS:
+      return {
+        ...state
+      }
+    case UserActions.LOAD_USERS:
+      return {
+        ...state,
+        users: [...action.payload]
+      }
+    case UserActions.CREATE_USER:
+      return {
+        ...state
+      }
+    case UserActions.LOAD_USER:
+      return {
+        ...state,
+        users: [action.payload, ...state.users]
+      }
+    case UserActions.GET_USER_DETAIL:
+      return {
+        ...state
+      }
+    case UserActions.LOAD_USER_DETAIL:
+      return {
+        ...state,
+        user: action.payload
+      }
+    case UserActions.CLEAR_USER_DETAIL:
+      return {
+        ...state,
+        user: new User()
+      }
+
     default:
       return state
   }

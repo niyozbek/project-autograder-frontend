@@ -5,6 +5,8 @@ import {StudentComponent} from "./student/student.component";
 import {AdminComponent} from "./admin.component";
 import {LecturerEditComponent} from "./lecturer/lecturer-edit/lecturer-edit.component";
 import {StudentEditComponent} from "./student/student-edit/student-edit.component";
+import {UserComponent} from "./user/user.component";
+import {UserEditComponent} from "./user/user-edit/user-edit.component";
 
 const routes: Routes = [
   {
@@ -12,7 +14,10 @@ const routes: Routes = [
       {path: 'lecturer', component: LecturerComponent},
       {path: 'lecturer/new', component: LecturerEditComponent},
       {path: 'student', component: StudentComponent},
-      {path: 'student/new', component: StudentEditComponent}
+      {path: 'student/new', component: StudentEditComponent},
+      {path: 'users', component: UserComponent},
+      {path: 'users/new', component: UserEditComponent},
+      {path: 'users/:id', component: UserEditComponent}
     ]
   }
 ]

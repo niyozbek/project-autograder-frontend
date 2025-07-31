@@ -13,6 +13,8 @@ import {StoreModule} from "@ngrx/store";
 import * as fromAdmin from './admin.reducer'
 import {EffectsModule} from "@ngrx/effects";
 import {UserEffects} from "./user/user.effects";
+import {UserComponent} from "./user/user.component";
+import {UserEditComponent} from "./user/user-edit/user-edit.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {UserEffects} from "./user/user.effects";
     LecturerComponent,
     LecturerEditComponent,
     StudentComponent,
-    StudentEditComponent
+    StudentEditComponent,
+    UserComponent,
+    UserEditComponent
   ],
   imports: [
     RouterModule,

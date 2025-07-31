@@ -86,6 +86,58 @@ export class UserEffects {
     })
   )
 
+  @Effect()
+  getUsers = this.actions$.pipe(
+    ofType(UserActions.GET_USERS),
+    switchMap((params: UserActions.GetUsers) => {
+      return this.http
+        .get<User[]>(
+          this.apiUrl + '/users',
+          {
+            params: {
+              pageNo: params.payload.pageIndex,
+              pageSize: params.payload.pageSize
+            }
+          }
+        )
+    }),
+    map(users => {
+      return new UserActions.LoadUsers(users)
+    })
+  )
+
+  @Effect()
+  createUser = this.actions$.pipe(
+    ofType(UserActions.CREATE_USER),
+    switchMap((body: UserActions.CreateUser) => {
+      return this.http
+        .post<User>(
+          this.apiUrl + '/users',
+          {
+            'username': body.payload.username,
+            'password': body.payload.password
+          }
+        )
+    }),
+    map(user => {
+      return new UserActions.LoadUser(user)
+    })
+  )
+
+  @Effect()
+  getUserDetail = this.actions$.pipe(
+    ofType(UserActions.GET_USER_DETAIL),
+    switchMap((params: UserActions.GetUserDetail) => {
+      return this.http
+        .get<User>(
+          this.apiUrl + '/users/'+ params.payload.id
+        )
+    }),
+    map(user => {
+      return new UserActions.LoadUserDetail(user)
+    })
+  )
+
   constructor(
     private actions$: Actions,
     private http: HttpClient
