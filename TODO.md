@@ -2,6 +2,8 @@
 [] own-profile
   [] view
   [] edit
+[] set proper permissions_enum, and buttons should be visible depending on that
+[] improve design of crud pages, all should be similar and simple, standardized.
 # Admin
 [] problems route
 [] submissions route - view submissions from all problems
