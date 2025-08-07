@@ -7,7 +7,7 @@ import {ProblemSubmissionComponent} from "./problem-submission/problem-submissio
 import {ProblemTestComponent} from "./problem-test/problem-test.component";
 
 const routes: Routes = [
-  {path: '', component: StudentComponent},
+  {path: '', component: StudentComponent}, //TODO: unused route
   {path: 'problem', component: ProblemComponent},
   {path: 'problem/:id', component: ProblemViewComponent},
   {path: 'problem/:id/submission', component: ProblemSubmissionComponent},

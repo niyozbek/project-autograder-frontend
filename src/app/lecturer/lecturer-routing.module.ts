@@ -11,7 +11,7 @@ import {
 } from "./problem/problem-test-case/problem-test-case-edit/problem-test-case-edit.component";
 
 const routes: Routes = [
-  {path: '', component: LecturerComponent},
+  {path: '', component: LecturerComponent}, //TODO: not used route
   {path: 'problem', component: ProblemComponent},
   {path: 'problem/:id', component: ProblemEditComponent},
   {path: 'problem/:id/submission', component: ProblemSubmissionComponent},
