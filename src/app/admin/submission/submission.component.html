@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Submission: {{submission.id}}</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Field</th>
+        <th>Information</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>ID</td>
+        <td>{{submission.id}}</td>
+      </tr>
+      <tr>
+        <td>ProblemId</td>
+        <td>{{submission.problemId}}</td>
+      </tr>
+      <tr>
+        <td>Language</td>
+        <td>{{submission.language}}</td>
+      </tr>
+      <tr>
+        <td>Version</td>
+        <td>{{submission.version}}</td>
+      </tr>
+      <tr>
+        <td>FileName</td>
+        <td>{{submission.filename}}</td>
+      </tr>
+      <tr>
+        <td>UserId</td>
+        <td>{{submission.userId}}</td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td><span style="font-size: 14px" class="{{this.statusMap.labelStyle}}">{{this.statusMap.label}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Code</h2>
+    <pre class="bg-dark text-white">{{submission.code}}</pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Tests</h2>
+    <table class="table table-dark">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Submission Id</th>
+        <th>Input</th>
+        <th>Expected Output</th>
+        <th>Actual Output</th>
+        <th>Verdict</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let submissionTest of submissionTests; let i = index"
+          class="{{submissionTest.testCaseIsPassed?'bg-success':'bg-danger'}}">
+        <td>{{submissionTest.id}} </td>
+        <td>{{submissionTest.submissionId}} </td>
+        <td>{{submissionTest.input}} </td>
+        <td>{{submissionTest.expectedOutput}} </td>
+        <td>{{submissionTest.actualOutput}} </td>
+        <td>{{submissionTest.testCaseIsPassed}} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

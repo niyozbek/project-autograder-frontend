@@ -12,7 +12,7 @@
   [DONE] create
   [DOING] update
   [] assign roles
-  [] remove lecturer, student.
+  [DONE] remove lecturer, student.
 [] roles route
 [] permissions route
 # Client

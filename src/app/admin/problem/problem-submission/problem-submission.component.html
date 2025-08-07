@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Submissions</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>ProblemId</th>
+        <th>Language</th>
+        <th>Version</th>
+        <th>FileName</th>
+        <th>UserId</th>
+        <th>Status</th>
+        <th>Grade</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let submission of submissions; let i = index">
+        <td>{{submission.id}} </td>
+        <td>{{submission.problemId}} </td>
+        <td>{{submission.language}} </td>
+        <td>{{submission.version}} </td>
+        <td>{{submission.filename}} </td>
+        <td>{{submission.userId}} </td>
+        <td><span style="font-size: 14px" class="{{statusMaps[i].labelStyle}}">{{statusMaps[i].label}}</span> </td>
+        <td>{{submission.grade}} </td>
+        <td><a class="btn btn-info" href="#" routerLink="/admin/submission/{{submission.id}}">Details</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="100"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="getServerData($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+<router-outlet></router-outlet>

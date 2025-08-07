@@ -12,9 +12,9 @@ import * as AuthActions from '../auth/store/auth.actions'
 
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false
-  isAdmin = false
-  isLecturer = false
-  isStudent = false
+  // isAdmin = false
+  // isLecturer = false
+  // isStudent = false
   private userSub: Subscription
 
   constructor(
@@ -27,21 +27,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(map(authState => authState.user))
       .subscribe(user => {
         this.isAuthenticated = !!user
-        this.isAdmin = false
-        this.isLecturer = false
-        this.isStudent = false
+        // this.isAdmin = false
+        // this.isLecturer = false
+        // this.isStudent = false
         if (this.isAuthenticated) {
-          switch (user.role) {
-            case 'ADMIN':
-              this.isAdmin = true
-              break
-            case 'LECTURER':
-              this.isLecturer = true
-              break
-            case 'STUDENT':
-              this.isStudent = true
-              break
-          }
+          // switch (user.role) {
+          //   case 'ADMIN':
+          //     this.isAdmin = true
+          //     break
+          //   case 'LECTURER':
+          //     this.isLecturer = true
+          //     break
+          //   case 'client':
+          //     this.isStudent = true
+          //     break
+          // }
         }
       })
   }

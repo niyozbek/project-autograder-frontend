@@ -8,11 +8,10 @@ import {map} from "rxjs/operators";
 import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-admin-student',
+  selector: 'app-admin-user',
   templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit, OnDestroy {
-  students: User[]
   users: User[]
   adminStateSubscription: Subscription
 

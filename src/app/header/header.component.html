@@ -14,13 +14,13 @@
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#" routerLink="/admin/users">Users</a>
-          <a class="dropdown-item" href="#" routerLink="/lecturer/problem">Problems</a>
+          <a class="dropdown-item" href="#" routerLink="/admin/problem">Problems</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" routerLink="/admin/roles">Roles</a>
           <a class="dropdown-item" href="#" routerLink="/admin/permissions">Permissions</a>
         </div>
       </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" href="#" routerLink="/student/problem">Problems</a></li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" href="#" routerLink="/client/problems">Problems</a></li>
       <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated"><a class="nav-link" href="#" routerLink="/auth">Authenticate</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

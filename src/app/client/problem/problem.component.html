@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Problems</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let problem of problems; let i = index">
+        <td>{{problem.id}} </td>
+        <td><a class="btn btn-link" href="#" routerLink="/client/problems/{{problem.id}}">{{problem.title}}</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="100"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="getServerData($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+<router-outlet></router-outlet>
