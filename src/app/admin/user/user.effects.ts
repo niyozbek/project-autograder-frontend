@@ -31,6 +31,20 @@ export class UserEffects {
   )
 
   @Effect()
+  getUser = this.actions$.pipe(
+    ofType(UserActions.GET_USER),
+    switchMap((params: UserActions.GetUser) => {
+      return this.http
+        .get<User>(
+          this.apiUrl + '/users/'+ params.payload.id
+        )
+    }),
+    map(user => {
+      return new UserActions.LoadUser(user)
+    })
+  )
+
+  @Effect()
   createUser = this.actions$.pipe(
     ofType(UserActions.CREATE_USER),
     switchMap((body: UserActions.CreateUser) => {
@@ -49,18 +63,19 @@ export class UserEffects {
   )
 
   @Effect()
-  getUserDetail = this.actions$.pipe(
-    ofType(UserActions.GET_USER_DETAIL),
-    switchMap((params: UserActions.GetUserDetail) => {
+  updateUser = this.actions$.pipe(
+    ofType(UserActions.UPDATE_USER),
+    switchMap((body: UserActions.UpdateUser) => {
       return this.http
-        .get<User>(
-          this.apiUrl + '/users/'+ params.payload.id
+        .put<User>(
+          this.apiUrl + '/users/' + body.payload.id,
+          body.payload.user
         )
     }),
     map(user => {
-      return new UserActions.LoadUserDetail(user)
+      return new UserActions.LoadUser(user)
     })
-  )
+)
 
   constructor(
     private actions$: Actions,

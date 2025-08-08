@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>Create User</h2>
+    <h2>{{ editMode ? 'Edit User' : 'Create User'}}</h2>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
@@ -17,6 +16,19 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="fullname">Fullname</label>
+            <input
+              type="text"
+              id="fullname"
+              class="form-control"
+              formControlName="fullname"
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="!editMode">
         <div class="col-md-12">
           <div class="form-group">
             <label for="password">Password</label>

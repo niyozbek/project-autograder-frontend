@@ -29,25 +29,24 @@ export function userReducer(
         ...state,
         users: [...action.payload]
       }
+    case UserActions.GET_USER:
+      return {
+        ...state
+      }
     case UserActions.CREATE_USER:
+      return {
+        ...state
+      }
+    case UserActions.UPDATE_USER:
       return {
         ...state
       }
     case UserActions.LOAD_USER:
       return {
         ...state,
-        users: [action.payload, ...state.users]
-      }
-    case UserActions.GET_USER_DETAIL:
-      return {
-        ...state
-      }
-    case UserActions.LOAD_USER_DETAIL:
-      return {
-        ...state,
         user: action.payload
       }
-    case UserActions.CLEAR_USER_DETAIL:
+    case UserActions.CLEAR_USER:
       return {
         ...state,
         user: new User()

@@ -3,12 +3,11 @@ import {User} from "./user.model";
 
 export const GET_USERS = '[Users] Get Users'
 export const LOAD_USERS = '[Users] Load Users'
+export const GET_USER = '[Users] Get User'
 export const CREATE_USER = '[Users] Create User'
-export const LOAD_USER = '[Users] Load User'
 export const UPDATE_USER = '[Users] Update User'
-export const GET_USER_DETAIL = '[Users] Get User Detail'
-export const LOAD_USER_DETAIL = '[Users] Load User Detail'
-export const CLEAR_USER_DETAIL = '[Users] Clear User Detail'
+export const LOAD_USER = '[Users] Load User'
+export const CLEAR_USER = '[Users] Clear User Detail'
 
 export class GetUsers implements Action {
   readonly type = GET_USERS
@@ -24,15 +23,15 @@ export class LoadUsers implements Action {
   }
 }
 
-export class CreateUser implements Action {
-  readonly type = CREATE_USER
+export class GetUser implements Action {
+  readonly type = GET_USER
 
-  constructor(public payload: User) {
+  constructor(public payload: { id: number }) {
   }
 }
 
-export class LoadUser implements Action {
-  readonly type = LOAD_USER
+export class CreateUser implements Action {
+  readonly type = CREATE_USER
 
   constructor(public payload: User) {
   }
@@ -45,22 +44,15 @@ export class UpdateUser implements Action {
   }
 }
 
-export class GetUserDetail implements Action {
-  readonly type = GET_USER_DETAIL
-
-  constructor(public payload: { id: number }) {
-  }
-}
-
-export class LoadUserDetail implements Action {
-  readonly type = LOAD_USER_DETAIL
+export class LoadUser implements Action {
+  readonly type = LOAD_USER
 
   constructor(public payload: User) {
   }
 }
 
-export class ClearUserDetail implements Action {
-  readonly type = CLEAR_USER_DETAIL
+export class ClearUser implements Action {
+  readonly type = CLEAR_USER
 
   constructor() {
   }
@@ -69,9 +61,8 @@ export class ClearUserDetail implements Action {
 export type UserActions =
   GetUsers
   | LoadUsers
+  | GetUser
   | CreateUser
-  | LoadUser
   | UpdateUser
-  | GetUserDetail
-  | LoadUserDetail
-  | ClearUserDetail
+  | LoadUser
+  | ClearUser

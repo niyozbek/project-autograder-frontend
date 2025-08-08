@@ -1,18 +1,28 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Users</h2>
-    <a class="btn btn-primary" href="#" routerLink="/admin/users/new">Create User</a>
+    <a class="btn btn-primary" href="#" [routerLink]="baseRoute + '/new'">Create User</a>
     <table class="table">
       <thead>
       <tr>
         <th>ID</th>
         <th>Username</th>
+        <th>Fullname</th>
+        <th>Roles</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let user of users; let i = index">
         <td>{{user.id}} </td>
         <td><a class="btn-link">{{user.username}}</a></td>
+        <td><a class="btn-link">{{user.fullname}}</a></td>
+        <td>
+          <span *ngFor="let role of user.roles; let last = last">
+            {{ role.name }}<span *ngIf="!last">, </span>
+          </span>
+        </td>
+        <td><a class="btn btn-info" [routerLink]="baseRoute + '/' + user.id + '/edit'">Edit</a></td>
       </tr>
       </tbody>
     </table>

@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: '', component: AdminComponent}, //TODO: unused route
   {path: 'users', component: UserComponent},
   {path: 'users/new', component: UserEditComponent},
-  {path: 'users/:id', component: UserEditComponent},
+  {path: 'users/:id/edit', component: UserEditComponent},
   {path: 'problem', component: ProblemComponent},
   {path: 'problem/:id', component: ProblemEditComponent},
   {path: 'problem/:id/submission', component: ProblemSubmissionComponent},

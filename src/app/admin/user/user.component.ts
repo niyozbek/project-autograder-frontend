@@ -6,20 +6,24 @@ import {PageEvent} from "@angular/material/paginator";
 import * as fromAdmin from '../admin.reducer'
 import {map} from "rxjs/operators";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-user',
   templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit, OnDestroy {
+  baseRoute: string;
   users: User[]
   adminStateSubscription: Subscription
 
   constructor(
+    private router: Router,
     private store: Store<fromAdmin.State>
   ) { }
 
   ngOnInit(): void {
+    this.baseRoute = this.router.url;
     this.adminStateSubscription = this.store.select('admin')
       .pipe(
         map(adminState => adminState.users)

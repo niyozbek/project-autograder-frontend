@@ -10,9 +10,9 @@
 [] users route
   [DONE] get-all
   [DONE] create
-  [DOING] update
-  [] assign roles
+  [DONE] update
   [DONE] remove lecturer, student.
+  [] assign roles
 [] roles route
 [] permissions route
 # Client

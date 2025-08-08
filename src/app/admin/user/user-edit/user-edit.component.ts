@@ -7,6 +7,7 @@ import * as fromAdmin from "../../admin.reducer";
 import {Subscription} from "rxjs";
 import {User} from "../user.model";
 import {map, switchMap} from "rxjs/operators";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-user-edit',
@@ -23,8 +24,9 @@ export class UserEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromAdmin.State>
-  ) {
+    private store: Store<fromAdmin.State>,
+    private location: Location
+) {
   }
 
   ngOnInit(): void {
@@ -39,9 +41,9 @@ export class UserEditComponent implements OnInit {
         this.editMode = !isNaN(id)
 
         if (this.editMode) {
-          this.store.dispatch(new UserActions.GetUserDetail({id: this.id}))
+          this.store.dispatch(new UserActions.GetUser({id: this.id}))
         } else {
-          this.store.dispatch(new UserActions.ClearUserDetail())
+          this.store.dispatch(new UserActions.ClearUser())
         }
 
         return this.store.select('admin')
@@ -57,18 +59,21 @@ export class UserEditComponent implements OnInit {
 
   private initForm() {
     let userUsername = this.user.username
-    let userPassword = ''
-
+    let userFullname = this.user.fullname
 
     this.userForm = new FormGroup({
       'username': new FormControl(userUsername, Validators.required),
-      'password': new FormControl(userPassword, Validators.required)
+      'fullname': new FormControl(userFullname, Validators.required),
+      'password': new FormControl('', this.editMode ? null : Validators.required),
     })
   }
 
   onSubmit() {
     if (this.editMode) {
-      this.store.dispatch(new UserActions.UpdateUser({id: this.id, user: this.userForm.value}))
+      this.userForm.value.id = this.id
+      this.store.dispatch(new UserActions.UpdateUser({id: this.id,
+        user: this.userForm.value
+      }))
     } else {
       this.store.dispatch(new UserActions.CreateUser(this.userForm.value))
     }
@@ -76,6 +81,6 @@ export class UserEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['../'], {relativeTo: this.route})
+    this.location.back();
   }
 }
