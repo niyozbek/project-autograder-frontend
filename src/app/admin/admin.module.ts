@@ -23,6 +23,7 @@ import {
 import {ProblemEffects} from "./problem/problem.effects";
 import {SubmissionEffects} from "./submission/submission.effects";
 import {TestCaseEffects} from "./test-case/test-case.effects";
+import { RoleComponent } from './role/role.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {TestCaseEffects} from "./test-case/test-case.effects";
     ProblemSubmissionComponent,
     SubmissionComponent,
     ProblemTestCaseComponent,
-    ProblemTestCaseEditComponent
+    ProblemTestCaseEditComponent,
+    RoleComponent
   ],
   imports: [
     RouterModule,
