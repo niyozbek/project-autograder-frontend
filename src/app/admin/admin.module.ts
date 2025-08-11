@@ -25,6 +25,7 @@ import {ProblemEffects} from "./problem/problem.effects";
 import {SubmissionEffects} from "./submission/submission.effects";
 import {TestCaseEffects} from "./test-case/test-case.effects";
 import { RoleComponent } from './role/role.component';
+import {RoleEffects} from "./role/role.effects";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RoleComponent } from './role/role.component';
     AdminRoutingModule,
     SharedModule,
     StoreModule.forFeature('admin', fromAdmin.reducers),
-    EffectsModule.forFeature([UserEffects, ProblemEffects, SubmissionEffects, TestCaseEffects]),
+    EffectsModule.forFeature([UserEffects, ProblemEffects, SubmissionEffects,
+      TestCaseEffects, RoleEffects]),
     MatPaginatorModule,
     QuillModule.forRoot(),
   ],

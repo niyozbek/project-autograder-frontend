@@ -14,6 +14,11 @@
     [] select2 roles, use specific route for assigning role.
   [DONE] remove lecturer, student.
 [] roles route
+  [DONE] get-all
+  [] create
+  [] create
+  [] update with select2 permissions
+  [] delete
 [] permissions route
 # Client
 [] submissions route - view submissions of the client for all problems

@@ -1,1 +1,40 @@
-<p>role works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Roles</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Permissions</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let role of roles; let i = index">
+        <td>{{role.id}}</td>
+        <td>{{role.name}}</td>
+        <td>
+          <span *ngFor="let permission of role.permissions; let last = last">
+            {{ permission.name }}<span *ngIf="!last">, </span>
+          </span>
+        </td>
+        <td>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
+            <a class="btn btn-outline-info" href="#" [routerLink]="baseRoute + '/' + role.id">View</a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="100"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="getServerData($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+<router-outlet></router-outlet>
