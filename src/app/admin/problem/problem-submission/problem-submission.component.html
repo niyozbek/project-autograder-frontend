@@ -25,7 +25,7 @@
         <td>{{submission.userId}} </td>
         <td><span style="font-size: 14px" class="{{statusMaps[i].labelStyle}}">{{statusMaps[i].label}}</span> </td>
         <td>{{submission.grade}} </td>
-        <td><a class="btn btn-info" href="#" routerLink="/admin/submission/{{submission.id}}">Details</a></td>
+        <td><a class="btn btn-info" href="#" [routerLink]="baseRoute + '/' + submission.id">Details</a></td>
       </tr>
       </tbody>
     </table>

@@ -6,6 +6,7 @@ import * as ProblemActions from './problem.actions';
 import * as fromAdmin from "../admin.reducer";
 import {map} from "rxjs/operators";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-problem',
@@ -13,15 +14,18 @@ import {Subscription} from "rxjs";
 })
 
 export class ProblemComponent implements OnInit, OnDestroy {
+  baseRoute: string;
   problems: Problem[]
   adminStateSubscription: Subscription
 
   constructor(
+    private router: Router,
     private store: Store<fromAdmin.State>
-  ) {
+) {
   }
 
   ngOnInit(): void {
+    this.baseRoute = this.router.url;
     this.adminStateSubscription = this.store.select('admin')
       .pipe(
         map(adminState => adminState.problems)

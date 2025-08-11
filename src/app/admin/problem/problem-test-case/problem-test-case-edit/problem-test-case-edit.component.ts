@@ -24,7 +24,7 @@ export class ProblemTestCaseEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.parent.params.pipe(
+    this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),

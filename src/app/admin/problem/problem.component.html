@@ -14,9 +14,9 @@
       <tbody>
       <tr *ngFor="let problem of problems; let i = index">
         <td>{{problem.id}} </td>
-        <td><a class="btn btn-link" href="#" routerLink="/admin/problem/{{problem.id}}">{{problem.title}}</a></td>
-        <td><a class="btn btn-success" href="#" routerLink="/admin/problem/{{problem.id}}/test-case">Test Cases</a></td>
-        <td><a class="btn btn-warning" href="#" routerLink="/admin/problem/{{problem.id}}/submission">Submissions</a></td>
+        <td><a class="btn btn-link" href="#" [routerLink]="baseRoute + '/' + problem.id">{{problem.title}}</a></td>
+        <td><a class="btn btn-success" href="#" [routerLink]="baseRoute + '/' + problem.id + '/test-cases'">Test Cases</a></td>
+        <td><a class="btn btn-warning" href="#" [routerLink]="baseRoute + '/' + problem.id + '/submissions'">Submissions</a></td>
       </tr>
       </tbody>
     </table>

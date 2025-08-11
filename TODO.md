@@ -5,14 +5,14 @@
 [] set proper permissions_enum, and buttons should be visible depending on that
 [] improve design of crud pages, all should be similar and simple, standardized.
 # Admin
-[] problems route
+[DONE] problems route
 [] submissions route - view submissions from all problems
 [] users route
   [DONE] get-all
   [DONE] create
   [DONE] update
+    [] select2 roles, use specific route for assigning role.
   [DONE] remove lecturer, student.
-  [] assign roles
 [] roles route
 [] permissions route
 # Client

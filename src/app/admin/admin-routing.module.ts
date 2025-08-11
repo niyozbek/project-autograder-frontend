@@ -17,14 +17,13 @@ const routes: Routes = [
   {path: 'users', component: UserComponent},
   {path: 'users/new', component: UserEditComponent},
   {path: 'users/:id/edit', component: UserEditComponent},
-  {path: 'problem', component: ProblemComponent},
-  {path: 'problem/:id', component: ProblemEditComponent},
-  {path: 'problem/:id/submission', component: ProblemSubmissionComponent},
-  {path: 'problem/:id/test-case', component: ProblemTestCaseComponent, children: [
-      {path: 'new', component: ProblemTestCaseEditComponent}
-    ]},
-  {path: 'problem/new', component: ProblemEditComponent},
-  {path: 'submission/:id', component: SubmissionComponent}
+  {path: 'problems', component: ProblemComponent},
+  {path: 'problems/:id', component: ProblemEditComponent},
+  {path: 'problems/:id/submissions', component: ProblemSubmissionComponent},
+  {path: 'problems/:id/test-cases', component: ProblemTestCaseComponent},
+  {path: 'problems/:id/test-cases/new', component: ProblemTestCaseEditComponent},
+  {path: 'problems/new', component: ProblemEditComponent},
+  {path: 'submissions/:id', component: SubmissionComponent}
 ]
 
 @NgModule({

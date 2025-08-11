@@ -13,6 +13,7 @@ import {Subscription} from "rxjs";
   templateUrl: './problem-test-case.component.html'
 })
 export class ProblemTestCaseComponent implements OnInit, OnDestroy {
+  baseRoute: string;
   routeSubscription: Subscription
   problemId: number
   testCases: TestCase[]
@@ -25,6 +26,7 @@ export class ProblemTestCaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.baseRoute = this.router.url;
     this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
