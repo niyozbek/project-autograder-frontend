@@ -1,7 +1,7 @@
 # Common
 [] own-profile
   [] view
-  [] edit
+  [] update
 [] set proper permissions_enum, and buttons should be visible depending on that
 [] improve design of crud pages, all should be similar and simple, standardized.
 # Admin
@@ -15,14 +15,23 @@
   [DONE] remove lecturer, student.
 [] roles route
   [DONE] get-all
-  [] create
+  [] view
   [] create
   [] update with select2 permissions
   [] delete
 [] permissions route
+  [] get-all
+  [] view
 # Client
-[] submissions route - view submissions of the client for all problems
+[] submissions route
+  [] get-all
+  [] view
+[] problem/{id}/submissions route
+  [] get all
+    [] submissions button for each problem
+    [] test-cases button for each problem
+  [] view
+  [] submit one more
 [] problems route
-  [] submissions button for each problem
-  [] test-cases button for each problem
+  [] get all
 [] update angular to the newest version.
