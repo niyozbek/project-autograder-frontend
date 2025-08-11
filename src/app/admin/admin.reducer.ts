@@ -5,6 +5,7 @@ import * as fromSubmissions from "./submission/submission.reducer";
 import * as fromTestCases from "./test-case/test-case.reducer";
 import * as fromProblems from './problem/problem.reducer'
 import * as fromRoles from './role/role.reducer'
+import * as fromPermissions from './permission/permission.reducer'
 
 export interface AdminState {
   users: fromUsers.State,
@@ -12,6 +13,7 @@ export interface AdminState {
   submissions: fromSubmissions.State
   testCases: fromTestCases.State
   roles: fromRoles.State
+  permissions: fromPermissions.State
 }
 
 export interface State extends fromRoot.AppState {
@@ -23,5 +25,6 @@ export const reducers: ActionReducerMap<AdminState> = {
   problems: fromProblems.problemReducer,
   submissions: fromSubmissions.submissionReducer,
   testCases: fromTestCases.testCaseReducer,
-  roles: fromRoles.roleReducer
+  roles: fromRoles.roleReducer,
+  permissions: fromPermissions.permissionReducer,
 }

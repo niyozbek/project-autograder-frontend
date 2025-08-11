@@ -26,6 +26,8 @@ import {SubmissionEffects} from "./submission/submission.effects";
 import {TestCaseEffects} from "./test-case/test-case.effects";
 import { RoleComponent } from './role/role.component';
 import {RoleEffects} from "./role/role.effects";
+import {PermissionComponent} from "./permission/permission.component";
+import {PermissionEffects} from "./permission/permission.effects";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import {RoleEffects} from "./role/role.effects";
     SubmissionViewComponent,
     ProblemTestCaseComponent,
     ProblemTestCaseEditComponent,
-    RoleComponent
+    RoleComponent,
+    PermissionComponent
   ],
   imports: [
     RouterModule,
@@ -48,7 +51,7 @@ import {RoleEffects} from "./role/role.effects";
     SharedModule,
     StoreModule.forFeature('admin', fromAdmin.reducers),
     EffectsModule.forFeature([UserEffects, ProblemEffects, SubmissionEffects,
-      TestCaseEffects, RoleEffects]),
+      TestCaseEffects, RoleEffects, PermissionEffects]),
     MatPaginatorModule,
     QuillModule.forRoot(),
   ],

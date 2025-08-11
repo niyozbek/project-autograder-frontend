@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Permissions</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let permission of permissions; let i = index">
+        <td>{{permission.id}}</td>
+        <td>{{permission.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="100"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="getServerData($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

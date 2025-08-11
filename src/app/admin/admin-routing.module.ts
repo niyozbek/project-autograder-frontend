@@ -13,6 +13,7 @@ import {
 } from "./problem/problem-test-case/problem-test-case-edit/problem-test-case-edit.component";
 import {SubmissionComponent} from "./submission/submission.component";
 import {RoleComponent} from "./role/role.component";
+import {PermissionComponent} from "./permission/permission.component";
 
 const routes: Routes = [
   {path: '', component: AdminComponent}, //TODO: unused route
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'problems/new', component: ProblemEditComponent},
   {path: 'submissions', component: SubmissionComponent},
   {path: 'submissions/:id', component: SubmissionViewComponent},
-  {path: 'roles', component: RoleComponent}
+  {path: 'roles', component: RoleComponent},
+  {path: 'permissions', component: PermissionComponent},
 ]
 
 @NgModule({

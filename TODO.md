@@ -11,7 +11,7 @@
   [DONE] get-all
   [DONE] create
   [DONE] update
-    [] select2 roles, use specific route for assigning role.
+    [] select2 roles, use a specific route for assigning role.
   [DONE] remove lecturer, student.
 [] roles route
   [DONE] get-all
@@ -19,16 +19,15 @@
   [] create
   [] update with select2 permissions
   [] delete
-[] permissions route
-  [] get-all
-  [] view
+[DONE] permissions route
+  [DONE] get-all
 # Client
 [] submissions route
   [] get-all
   [] view
 [] problem/{id}/submissions route
   [] get all
-    [] submissions button for each problem
+    [] submission button for each problem
     [] test-cases button for each problem
   [] view
   [] submit one more
