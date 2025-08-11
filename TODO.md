@@ -6,7 +6,7 @@
 [] improve design of crud pages, all should be similar and simple, standardized.
 # Admin
 [DONE] problems route
-[] submissions route - view submissions from all problems
+[DONE] submissions route - view submissions from all problems
 [] users route
   [DONE] get-all
   [DONE] create

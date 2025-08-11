@@ -16,6 +16,7 @@ import {ProblemComponent} from "./problem/problem.component";
 import {ProblemEditComponent} from "./problem/problem-edit/problem-edit.component";
 import {ProblemSubmissionComponent} from "./problem/problem-submission/problem-submission.component";
 import {SubmissionComponent} from "./submission/submission.component";
+import {SubmissionViewComponent} from "./submission/submission-view/submission-view.component";
 import {ProblemTestCaseComponent} from "./problem/problem-test-case/problem-test-case.component";
 import {
   ProblemTestCaseEditComponent
@@ -34,6 +35,7 @@ import { RoleComponent } from './role/role.component';
     ProblemEditComponent,
     ProblemSubmissionComponent,
     SubmissionComponent,
+    SubmissionViewComponent,
     ProblemTestCaseComponent,
     ProblemTestCaseEditComponent,
     RoleComponent

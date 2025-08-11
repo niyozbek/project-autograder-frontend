@@ -12,6 +12,26 @@ export class SubmissionEffects {
   apiUrl = environment.apiUrl + '/api/submissions'
 
   @Effect()
+  getSubmissions = this.actions$.pipe(
+    ofType(SubmissionAction.GET_SUBMISSIONS),
+    switchMap((params: SubmissionAction.GetSubmissions) => {
+      return this.http
+        .get<Submission[]>(
+          this.apiUrl,
+          {
+            params: {
+              pageNo: params.payload.pageIndex,
+              pageSize: params.payload.pageSize
+            }
+          }
+        )
+    }),
+    map(submissions => {
+      return new SubmissionAction.LoadSubmissions(submissions)
+    })
+  )
+
+  @Effect()
   getSubmissionsByProblemId = this.actions$.pipe(
     ofType(SubmissionAction.GET_SUBMISSIONS_BY_PROBLEM_ID),
     switchMap((params: SubmissionAction.GetSubmissionsByProblemId) => {

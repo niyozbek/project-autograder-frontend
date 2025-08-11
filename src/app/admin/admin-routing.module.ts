@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {AdminComponent} from "./admin.component";
 import {UserComponent} from "./user/user.component";
 import {UserEditComponent} from "./user/user-edit/user-edit.component";
-import {SubmissionComponent} from "./submission/submission.component";
+import {SubmissionViewComponent} from "./submission/submission-view/submission-view.component";
 import {ProblemComponent} from "./problem/problem.component";
 import {ProblemEditComponent} from "./problem/problem-edit/problem-edit.component";
 import {ProblemSubmissionComponent} from "./problem/problem-submission/problem-submission.component";
@@ -11,6 +11,7 @@ import {ProblemTestCaseComponent} from "./problem/problem-test-case/problem-test
 import {
   ProblemTestCaseEditComponent
 } from "./problem/problem-test-case/problem-test-case-edit/problem-test-case-edit.component";
+import {SubmissionComponent} from "./submission/submission.component";
 
 const routes: Routes = [
   {path: '', component: AdminComponent}, //TODO: unused route
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'problems/:id/test-cases', component: ProblemTestCaseComponent},
   {path: 'problems/:id/test-cases/new', component: ProblemTestCaseEditComponent},
   {path: 'problems/new', component: ProblemEditComponent},
-  {path: 'submissions/:id', component: SubmissionComponent}
+  {path: 'submissions', component: SubmissionComponent},
+  {path: 'submissions/:id', component: SubmissionViewComponent}
 ]
 
 @NgModule({

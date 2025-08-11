@@ -2,12 +2,20 @@ import {Action} from "@ngrx/store";
 import {Submission} from "./submission.model";
 import {SubmissionTest} from "./submission-test.model";
 
+export const GET_SUBMISSIONS = '[Submissions] Get Submissions'
 export const GET_SUBMISSIONS_BY_PROBLEM_ID = '[Submissions] Get Submissions by problemId'
 export const LOAD_SUBMISSIONS = '[Submissions] Load Submissions'
 export const GET_SUBMISSION = '[Submissions] Get Submission'
 export const LOAD_SUBMISSION = '[Submissions] Load Submission'
 export const GET_SUBMISSION_TESTS = '[Submissions] Get Submission Tests'
 export const LOAD_SUBMISSION_TESTS = '[Submissions] Load Submission Tests'
+
+export class GetSubmissions implements Action {
+  readonly type = GET_SUBMISSIONS
+
+  constructor(public payload: { pageIndex: number, pageSize: number }) {
+  }
+}
 
 export class GetSubmissionsByProblemId implements Action {
   readonly type = GET_SUBMISSIONS_BY_PROBLEM_ID
@@ -52,7 +60,8 @@ export class LoadSubmissionTests implements Action {
 }
 
 export type SubmissionActions =
-  GetSubmissionsByProblemId
+  GetSubmissions
+  | GetSubmissionsByProblemId
   | LoadSubmissions
   | GetSubmission
   | LoadSubmission

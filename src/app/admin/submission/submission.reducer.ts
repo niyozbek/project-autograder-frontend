@@ -23,6 +23,10 @@ export function submissionReducer(
   action: SubmissionActions.SubmissionActions
 ) {
   switch (action.type) {
+    case SubmissionActions.GET_SUBMISSIONS:
+      return {
+        ...state
+      }
     case SubmissionActions.GET_SUBMISSIONS_BY_PROBLEM_ID:
       return {
         ...state
