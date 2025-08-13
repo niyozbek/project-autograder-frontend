@@ -10,8 +10,7 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-permission',
-  templateUrl: './permission.component.html',
-  styleUrls: ['./permission.component.css']
+  templateUrl: './permission.component.html'
 })
 export class PermissionComponent implements OnInit, OnDestroy {
   baseRoute: string;
