@@ -34,6 +34,12 @@
         <td><span style="font-size: 14px" class="{{statusMap.labelStyle}}">{{statusMap.label}}</span></td>
       </tr>
       <tr>
+        <td>Output</td>
+        <td>
+          <pre [innerHTML]="submission.output"></pre>
+        </td>
+      </tr>
+      <tr>
         <td>Test Cases Processed</td>
         <td>
             <mat-progress-bar mode="determinate"

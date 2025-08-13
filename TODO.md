@@ -21,7 +21,9 @@
   [] delete
 [DONE] permissions route
   [DONE] get-all
+[DONE] display error message for submission
 # Client
+[DONE] display error message for submission
 [] submissions route
   [] get-all
   [] view

@@ -6,6 +6,7 @@ export class Submission {
   public filename: string
   public code: string
   public status: string = 'INIT'
+  public output: string
   public grade: number
 }
 
