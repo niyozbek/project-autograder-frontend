@@ -53,7 +53,8 @@ export class UserEffects {
           this.apiUrl + '/users',
           {
             'username': body.payload.username,
-            'password': body.payload.password
+            'password': body.payload.password,
+            'fullname': body.payload.fullname
           }
         )
     }),
