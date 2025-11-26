@@ -14,6 +14,7 @@ import {
 import {SubmissionComponent} from "./submission/submission.component";
 import {RoleComponent} from "./role/role.component";
 import {RoleViewComponent} from "./role/role-view/role-view.component";
+import {RoleEditComponent} from "./role/role-edit/role-edit.component";
 import {PermissionComponent} from "./permission/permission.component";
 
 const routes: Routes = [
@@ -30,7 +31,9 @@ const routes: Routes = [
   {path: 'submissions', component: SubmissionComponent},
   {path: 'submissions/:id', component: SubmissionViewComponent},
   {path: 'roles', component: RoleComponent},
+  {path: 'roles/new', component: RoleEditComponent},
   {path: 'roles/:id', component: RoleViewComponent},
+  {path: 'roles/:id/edit', component: RoleEditComponent},
   {path: 'permissions', component: PermissionComponent},
 ]
 
