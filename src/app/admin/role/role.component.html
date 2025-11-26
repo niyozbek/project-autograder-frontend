@@ -24,8 +24,9 @@
         </td>
         <td>
           <div class="btn-group">
-            <a class="btn btn-primary" href="#" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
-            <a class="btn btn-outline-info" href="#" [routerLink]="baseRoute + '/' + role.id">View</a>
+            <a class="btn btn-primary" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
+            <a class="btn btn-outline-info" [routerLink]="baseRoute + '/' + role.id">View</a>
+            <button class="btn btn-danger" (click)="onDelete(role.id)">Delete</button>
           </div>
         </td>
       </tr>

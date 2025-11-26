@@ -7,6 +7,7 @@ export const GET_ROLE = '[Roles] Get Role'
 export const LOAD_ROLE = '[Roles] Load Role'
 export const CREATE_ROLE = '[Roles] Create Role'
 export const UPDATE_ROLE = '[Roles] Update Role'
+export const DELETE_ROLE = '[Roles] Delete Role'
 export const CLEAR_ROLE = '[Roles] Clear Role'
 
 export class GetRoles implements Action {
@@ -51,6 +52,13 @@ export class UpdateRole implements Action {
   }
 }
 
+export class DeleteRole implements Action {
+  readonly type = DELETE_ROLE
+
+  constructor(public payload: { id: number }) {
+  }
+}
+
 export class ClearRole implements Action {
   readonly type = CLEAR_ROLE
 }
@@ -62,4 +70,5 @@ export type RoleActions =
   | LoadRole
   | CreateRole
   | UpdateRole
+  | DeleteRole
   | ClearRole

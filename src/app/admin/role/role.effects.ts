@@ -67,6 +67,17 @@ export class RoleEffects {
     })
   )
 
+  @Effect()
+  deleteRole = this.actions$.pipe(
+    ofType(RoleActions.DELETE_ROLE),
+    switchMap((action: RoleActions.DeleteRole) => {
+      return this.http.delete(this.apiUrl + '/' + action.payload.id)
+    }),
+    map(() => {
+      return new RoleActions.GetRoles({pageIndex: 0, pageSize: 10})
+    })
+  )
+
   constructor(
     private actions$: Actions,
     private http: HttpClient,

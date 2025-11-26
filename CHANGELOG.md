@@ -59,6 +59,29 @@ feat(admin): add role create/edit with permissions selection
 
 ---
 
-## Commit 4: (Pending)
-Admin Roles - Delete Feature
+## Commit 4: Admin Roles - Delete Feature
+**TODO to mark done:** Line 33 `[] delete`
+
+**Files changed:**
+- `src/app/admin/role/role.actions.ts` (lines 9, 51-56, 65) - added DELETE_ROLE action
+- `src/app/admin/role/role.effects.ts` (lines 63-71) - added deleteRole effect
+- `src/app/admin/role/role.component.ts` (lines 45-49) - added onDelete method
+- `src/app/admin/role/role.component.html` (line 29) - added Delete button
+
+**Why this implementation:**
+- **Problem:** No way to remove roles from the system via UI
+- **Approach:** Standard NgRx pattern - dispatch action -> effect calls HTTP DELETE -> refresh list
+- **Pattern:** Same as other delete operations would follow in codebase
+- **Confirmation:** Added simple `confirm()` dialog to prevent accidental deletes (MVP approach, no custom modal needed)
+- **After delete:** Effect dispatches GetRoles to refresh the list automatically
+
+**Commit message:**
+```
+feat(admin): add role delete functionality
+```
+
+---
+
+## Commit 5: (Pending)
+Admin Users - Role Assignment
 
