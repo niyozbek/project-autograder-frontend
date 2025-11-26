@@ -165,8 +165,32 @@ feat(client): add profile page (view only)
 
 ---
 
+## Commit 8: Problem Submissions Route Enhancement
+**TODO to mark done:** Lines 42-47 `[] problem/{id}/submissions route`
+
+**Files modified:**
+- `src/app/client/problem-submission/problem-submission.component.ts` (lines 10, 19-20, 27-28, 35-42, 67-69)
+  - Added auth store import
+  - Added `authSubscription` and `canViewTestCases` properties
+  - Added role check logic in ngOnInit
+  - Cleanup subscription in ngOnDestroy
+- `src/app/client/problem-submission/problem-submission.component.html` (lines 3-7)
+  - Added "Submit Again" button linking back to problem
+  - Added "Test Cases" button (visible only to ADMIN/LECTURER)
+
+**Why:**
+- "Submit Again" allows users to quickly return to problem page to submit more solutions
+- "Test Cases" button gives lecturers/admins quick access to manage test cases for the problem
+- Role-based visibility ensures students don't see admin-only features
+
+**Commit message:**
+```
+feat(client): add submit again and test cases buttons to problem submissions
+```
+
+---
+
 ## Remaining TODO items:
-- Client problem/{id}/submissions route (lines 42-47)
 - Improve design consistency (line 10) - low priority
-- Update Angular (line 50) - low priority
+- Update Angular (line 50) - already marked done
 

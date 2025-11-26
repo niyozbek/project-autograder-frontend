@@ -6,6 +6,7 @@ import * as SubmissionActions from './problem-submission.actions';
 import {PageEvent} from "@angular/material/paginator";
 import {STATUSES, StatusMap, Submission} from "./problem-submission.model";
 import * as fromClient from "../client.reducer";
+import * as fromApp from "../../store/app.reducer";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -14,18 +15,31 @@ import {Subscription} from "rxjs";
 })
 export class ProblemSubmissionComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription
+  authSubscription: Subscription
   problemId: number
   submissions: Submission[]
   statusMaps: StatusMap[] = []
+  canViewTestCases: boolean = false
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromClient.State>
+    private store: Store<fromClient.State>,
+    private appStore: Store<fromApp.AppState>
   ) {
   }
 
   ngOnInit(): void {
+    // Check user role for test cases visibility
+    this.authSubscription = this.appStore.select('auth')
+      .pipe(map(authState => authState.user))
+      .subscribe(user => {
+        if (user) {
+          const role = user.role?.toUpperCase();
+          this.canViewTestCases = role === 'ADMIN' || role === 'LECTURER';
+        }
+      });
+
     this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
@@ -61,6 +75,9 @@ export class ProblemSubmissionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe()
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe()
+    }
   }
 
 
