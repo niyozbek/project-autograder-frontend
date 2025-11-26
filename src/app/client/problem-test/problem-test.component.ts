@@ -65,7 +65,7 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     if (this.webSocketClient != null) {
       return
     }
-    const socket = new SockJS(environment.apiUrl + '/gs-guide-websocket');
+    const socket = new SockJS(environment.apiUrl + '/ws/submissions');
     this.webSocketClient = Stomp.over(socket);
 
     const _this = this;
