@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>My Submissions</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Problem</th>
+        <th>Language</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let submission of submissions">
+        <td>{{submission.id}}</td>
+        <td>
+          <a routerLink="/client/problems/{{submission.problemId}}">Problem #{{submission.problemId}}</a>
+        </td>
+        <td>{{submission.language}} ({{submission.version}})</td>
+        <td>
+          <span [class]="getStatusStyle(submission.status)">{{getStatusLabel(submission.status)}}</span>
+        </td>
+        <td>
+          <a class="btn btn-outline-info btn-sm" routerLink="/client/submissions/{{submission.id}}">View</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="100"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="getServerData($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>
+

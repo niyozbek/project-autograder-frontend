@@ -14,6 +14,8 @@ import {ProblemViewComponent} from "./problem-view/problem-view.component";
 import {ProblemSubmissionComponent} from "./problem-submission/problem-submission.component";
 import {ProblemSubmissionEffects} from "./problem-submission/problem-submission.effects";
 import {ProblemTestComponent} from "./problem-test/problem-test.component";
+import {MySubmissionsComponent} from "./my-submissions/my-submissions.component";
+import {MySubmissionsEffects} from "./my-submissions/my-submissions.effects";
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 
@@ -23,7 +25,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ProblemComponent,
     ProblemViewComponent,
     ProblemSubmissionComponent,
-    ProblemTestComponent
+    ProblemTestComponent,
+    MySubmissionsComponent
   ],
     imports: [
         RouterModule,
@@ -32,7 +35,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         SharedModule,
         MatPaginatorModule,
         StoreModule.forFeature('client', fromClient.reducers),
-        EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects]),
+        EffectsModule.forFeature([ProblemEffects, ProblemSubmissionEffects, MySubmissionsEffects]),
         MonacoEditorModule.forRoot(),
         MatProgressBarModule
     ],

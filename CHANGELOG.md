@@ -106,6 +106,38 @@ feat(admin): add role assignment to user edit
 
 ---
 
-## Commit 6: (Pending)
+## Commit 6: Client My Submissions Route
+**TODO to mark done:** 
+- Line 48-49 `[] problems route > [] get all` - Already working, mark as DONE
+- Line 39-41 `[] submissions route > [] get-all, [] view` - Implemented now
+
+**Files created:**
+- `src/app/client/my-submissions/my-submissions.model.ts` - submission model with status map
+- `src/app/client/my-submissions/my-submissions.actions.ts` - GET_MY_SUBMISSIONS, LOAD_MY_SUBMISSIONS
+- `src/app/client/my-submissions/my-submissions.reducer.ts` - state management
+- `src/app/client/my-submissions/my-submissions.effects.ts` - API call to /api/submissions/own
+- `src/app/client/my-submissions/my-submissions.component.ts` - component logic
+- `src/app/client/my-submissions/my-submissions.component.html` - table with submissions
+
+**Files modified:**
+- `src/app/client/client.reducer.ts` (line 3, 10, 19) - added mySubmissions reducer
+- `src/app/client/client.module.ts` (lines 17-18, 27, 35) - registered component and effects
+- `src/app/client/client-routing.module.ts` (lines 8, 14) - added /submissions route
+
+**Why this implementation:**
+- **Problem:** Users couldn't see all their submissions in one place
+- **Backend:** Uses existing `GET /api/submissions/own` endpoint (VIEW_OWN_SUBMISSION permission)
+- **Pattern:** Same NgRx pattern as problems - actions, effects, reducer, component
+- **View link:** Each submission links to existing `/client/submissions/:id` (ProblemTestComponent)
+- **Status display:** Reuses status badge styling from admin submission model
+
+**Commit message:**
+```
+feat(client): add my submissions list page
+```
+
+---
+
+## Commit 7: (Pending)
 Next TODO item
 
