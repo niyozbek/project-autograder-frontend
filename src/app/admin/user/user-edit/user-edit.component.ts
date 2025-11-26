@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as UserActions from '../../user/user.actions';
+import * as RoleActions from '../../role/role.actions';
 import * as fromAdmin from "../../admin.reducer";
 import {Subscription} from "rxjs";
 import {User} from "../user.model";
+import {Role} from "../../role/role.model";
 import {map, switchMap} from "rxjs/operators";
 import { Location } from '@angular/common';
 
@@ -13,9 +15,11 @@ import { Location } from '@angular/common';
   selector: 'app-admin-user-edit',
   templateUrl: './user-edit.component.html'
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription
   user: User
+  allRoles: Role[] = []
+  selectedRoleIds: number[] = []
 
   id: number
   editMode = false
@@ -26,18 +30,19 @@ export class UserEditComponent implements OnInit {
     private router: Router,
     private store: Store<fromAdmin.State>,
     private location: Location
-) {
+  ) {
   }
 
   ngOnInit(): void {
-    // set this.problem by id from state.problems
+    // Fetch all roles for the checkbox list
+    this.store.dispatch(new RoleActions.GetRoles({pageIndex: 0, pageSize: 100}))
+
     this.routeSubscription = this.route.params.pipe(
       map(params => {
         return +params['id']
       }),
       switchMap(id => {
         this.id = id
-        // get problem in case id is not a number but "new"
         this.editMode = !isNaN(id)
 
         if (this.editMode) {
@@ -47,12 +52,15 @@ export class UserEditComponent implements OnInit {
         }
 
         return this.store.select('admin')
-      }),
-      map(usersState => {
-        return usersState.users
       })
-    ).subscribe(user => {
-      this.user = user.user
+    ).subscribe(adminState => {
+      this.user = adminState.users.user
+      this.allRoles = adminState.roles.roles
+
+      if (this.editMode && this.user.roles) {
+        this.selectedRoleIds = this.user.roles.map(r => r.id)
+      }
+
       this.initForm()
     })
   }
@@ -80,7 +88,34 @@ export class UserEditComponent implements OnInit {
     this.onCancel()
   }
 
+  isRoleSelected(roleId: number): boolean {
+    return this.selectedRoleIds.includes(roleId)
+  }
+
+  onRoleChange(roleId: number, event: Event) {
+    const checked = (event.target as HTMLInputElement).checked
+    if (checked) {
+      this.selectedRoleIds.push(roleId)
+    } else {
+      this.selectedRoleIds = this.selectedRoleIds.filter(id => id !== roleId)
+    }
+  }
+
+  onAssignRoles() {
+    const roles = this.selectedRoleIds.map(id => ({id}))
+    this.store.dispatch(new UserActions.AssignRoles({
+      id: this.id,
+      roles: roles
+    }))
+  }
+
   onCancel() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe()
+    }
   }
 }

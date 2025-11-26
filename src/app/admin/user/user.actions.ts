@@ -6,6 +6,7 @@ export const LOAD_USERS = '[Users] Load Users'
 export const GET_USER = '[Users] Get User'
 export const CREATE_USER = '[Users] Create User'
 export const UPDATE_USER = '[Users] Update User'
+export const ASSIGN_ROLES = '[Users] Assign Roles'
 export const LOAD_USER = '[Users] Load User'
 export const CLEAR_USER = '[Users] Clear User Detail'
 
@@ -44,6 +45,13 @@ export class UpdateUser implements Action {
   }
 }
 
+export class AssignRoles implements Action {
+  readonly type = ASSIGN_ROLES
+
+  constructor(public payload: { id: number, roles: { id: number }[] }) {
+  }
+}
+
 export class LoadUser implements Action {
   readonly type = LOAD_USER
 
@@ -64,5 +72,6 @@ export type UserActions =
   | GetUser
   | CreateUser
   | UpdateUser
+  | AssignRoles
   | LoadUser
   | ClearUser

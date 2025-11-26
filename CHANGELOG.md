@@ -82,6 +82,30 @@ feat(admin): add role delete functionality
 
 ---
 
-## Commit 5: (Pending)
-Admin Users - Role Assignment
+## Commit 5: Admin Users - Role Assignment
+**TODO to mark done:** Line 26 `[] select2 roles, use a specific route for assigning role.`
+
+**Files changed:**
+- `src/app/admin/user/user.actions.ts` (lines 6, 47-52, 70) - added ASSIGN_ROLES action
+- `src/app/admin/user/user.effects.ts` (lines 4, 8, 81-93) - added assignRoles effect using PUT /users/{id}/assign-roles
+- `src/app/admin/user/user-edit/user-edit.component.ts` (lines 1, 6-7, 10, 18, 21-22, 37, 53-59, 69-92) - added roles logic
+- `src/app/admin/user/user-edit/user-edit.component.html` (lines 51-67) - added roles checkbox section
+
+**Why this implementation:**
+- **Problem:** Admins could create/edit users but couldn't assign roles
+- **Backend endpoint:** Uses existing `PUT /users/{id}/assign-roles` (ASSIGN_ROLE permission required)
+- **Approach:** Checkbox list for roles (same pattern as role-edit permissions)
+- **Separate section:** Role assignment is visually separate from user details because it uses a different API endpoint
+- **Edit mode only:** Roles section only shows when editing (user must exist first)
+- **What breaks without this:** Users would have no roles and no permissions
+
+**Commit message:**
+```
+feat(admin): add role assignment to user edit
+```
+
+---
+
+## Commit 6: (Pending)
+Next TODO item
 
