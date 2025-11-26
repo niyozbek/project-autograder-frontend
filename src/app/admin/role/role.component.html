@@ -26,7 +26,7 @@
           <div class="btn-group">
             <a class="btn btn-primary" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
             <a class="btn btn-outline-info" [routerLink]="baseRoute + '/' + role.id">View</a>
-            <button class="btn btn-danger" (click)="onDelete(role.id)">Delete</button>
+            <button class="btn btn-danger" disabled title="Backend DELETE endpoint not implemented">Delete</button>
           </div>
         </td>
       </tr>
