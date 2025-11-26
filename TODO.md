@@ -1,5 +1,7 @@
 # Common
-[] own-profile
+[] own-profilems route
+  [] get all
+[] update
   [] view
   [] update
 [DONE] set proper permissions_enum, and buttons should be visible depending on that
@@ -46,3 +48,5 @@
 [] problems route
   [] get all
 [] update angular to the newest version.
+
+[-] http://localhost:4200/not-found on the all users
