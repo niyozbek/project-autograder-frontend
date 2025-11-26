@@ -27,18 +27,18 @@
   [DONE] remove lecturer, student.
 [] roles route
   [DONE] get-all
-  [] view
-  [] create
-  [] update with select2 permissions
-  [] delete
+  [DONE] view
+  [DONE] create
+  [DONE] update with select2 permissions
+  [Done] delete
 [DONE] permissions route
   [DONE] get-all
 [DONE] display error message for submission
 # Client
 [DONE] display error message for submission
-[] submissions route
-  [] get-all
-  [] view
+[DONE] submissions route
+  [DONE] get-all
+  [DONE] view
 [] problem/{id}/submissions route
   [] get all
     [] submission button for each problem
@@ -46,7 +46,7 @@
   [] view
   [] submit one more
 [] problems route
-  [] get all
-[] update angular to the newest version.
+  [DONE] get all
+[Done] update angular to the newest version.
 
 [Done] http://localhost:4200/not-found on the all users

@@ -16,6 +16,7 @@ import {ProblemSubmissionEffects} from "./problem-submission/problem-submission.
 import {ProblemTestComponent} from "./problem-test/problem-test.component";
 import {MySubmissionsComponent} from "./my-submissions/my-submissions.component";
 import {MySubmissionsEffects} from "./my-submissions/my-submissions.effects";
+import {ProfileComponent} from "./profile/profile.component";
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 
@@ -26,7 +27,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ProblemViewComponent,
     ProblemSubmissionComponent,
     ProblemTestComponent,
-    MySubmissionsComponent
+    MySubmissionsComponent,
+    ProfileComponent
   ],
     imports: [
         RouterModule,

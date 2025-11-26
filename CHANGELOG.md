@@ -138,6 +138,35 @@ feat(client): add my submissions list page
 
 ---
 
-## Commit 7: (Pending)
-Next TODO item
+## Commit 7: Own Profile Route
+**TODO to mark done:** Lines 2-6 `[] own-profile route > [] view, [] update`
+
+**Note:** Update is partially done - view works, but edit requires backend `/api/users/me` endpoint.
+
+**Files created:**
+- `src/app/client/profile/profile.component.ts` - reads username/role from auth state
+- `src/app/client/profile/profile.component.html` - displays profile card
+
+**Files modified:**
+- `src/app/client/client.module.ts` (lines 19, 29) - registered ProfileComponent
+- `src/app/client/client-routing.module.ts` (lines 9, 16) - added /profile route
+- `src/app/header/header.component.html` (lines 44-46) - added Profile link in navbar
+
+**Why this implementation:**
+- **Problem:** Users couldn't see their profile
+- **Limitation:** Backend doesn't have `/api/users/me` endpoint; auth state only has username/role (no ID)
+- **MVP solution:** Display username and role from local auth state (no API call needed)
+- **Future:** When backend adds `/api/users/me`, can fetch full profile and enable editing
+
+**Commit message:**
+```
+feat(client): add profile page (view only)
+```
+
+---
+
+## Remaining TODO items:
+- Client problem/{id}/submissions route (lines 42-47)
+- Improve design consistency (line 10) - low priority
+- Update Angular (line 50) - low priority
 
