@@ -49,4 +49,4 @@
   [] get all
 [] update angular to the newest version.
 
-[-] http://localhost:4200/not-found on the all users
+[Done] http://localhost:4200/not-found on the all users
