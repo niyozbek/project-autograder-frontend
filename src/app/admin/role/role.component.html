@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Roles</h2>
+    <div class="mb-3">
+      <a class="btn btn-success" [routerLink]="baseRoute + '/new'">New Role</a>
+    </div>
     <table class="table">
       <thead>
       <tr>
@@ -21,8 +24,9 @@
         </td>
         <td>
           <div class="btn-group">
-            <a class="btn btn-primary" href="#" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
-            <a class="btn btn-outline-info" href="#" [routerLink]="baseRoute + '/' + role.id">View</a>
+            <a class="btn btn-primary" [routerLink]="baseRoute + '/' + role.id + '/edit'">Edit</a>
+            <a class="btn btn-outline-info" [routerLink]="baseRoute + '/' + role.id">View</a>
+            <button class="btn btn-danger" disabled title="Backend DELETE endpoint not implemented">Delete</button>
           </div>
         </td>
       </tr>

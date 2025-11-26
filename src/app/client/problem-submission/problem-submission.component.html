@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>Submissions</h2>
+    <h2>Submissions for Problem #{{problemId}}</h2>
+    <div class="mb-3">
+      <a class="btn btn-primary mr-2" routerLink="/client/problems/{{problemId}}">Submit Again</a>
+      <a class="btn btn-secondary" *ngIf="canViewTestCases" routerLink="/admin/problems/{{problemId}}/test-cases">Test Cases</a>
+    </div>
     <table class="table">
       <thead>
       <tr>

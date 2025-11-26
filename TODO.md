@@ -1,5 +1,7 @@
 # Common
-[] own-profile
+[] own-profilems route
+  [] get all
+[] update
   [] view
   [] update
 [DONE] set proper permissions_enum, and buttons should be visible depending on that
@@ -10,7 +12,7 @@
 # Fixed Issues (Elite Backend Integration)
 [DONE] WebSocket endpoint - updated from /gs-guide-websocket to /ws/submissions
 [DONE] Role-based menu visibility - proper menus for each role
-  - ADMIN: Full admin dropdown (Users, Problems, Submissions, Roles, Permissions)
+  - ADMIN: Full admin dropdown (Users, Problems, Submissions, Roles, Permissions) 
   - LECTURER: Manage dropdown (Problems, Submissions, Roles) 
   - STUDENT: Only client problems view
 [DONE] Authorization UX - users only see pages they have permissions for
@@ -23,26 +25,28 @@
   [DONE] update
     [] select2 roles, use a specific route for assigning role.
   [DONE] remove lecturer, student.
-[] roles route
+[DONE] roles route
   [DONE] get-all
-  [] view
-  [] create
-  [] update with select2 permissions
-  [] delete
+  [DONE] view
+  [DONE] create
+  [DONE] update with select2 permissions
+  [Done] delete
 [DONE] permissions route
   [DONE] get-all
 [DONE] display error message for submission
 # Client
 [DONE] display error message for submission
-[] submissions route
-  [] get-all
-  [] view
-[] problem/{id}/submissions route
-  [] get all
-    [] submission button for each problem
-    [] test-cases button for each problem
-  [] view
-  [] submit one more
-[] problems route
-  [] get all
-[] update angular to the newest version.
+[DONE] submissions route
+  [DONE] get-all
+  [DONE] view
+[DONE] problem/{id}/submissions route
+  [DONE] get all
+    [DONE] submission button for each problem
+    [CANCELLED] test-cases button for each problem
+  [DONE] view
+  [DONE] submit one more
+[DONE] problems route
+  [DONE] get all
+[Done] update angular to the newest version.
+
+[Done] http://localhost:4200/not-found on the all users

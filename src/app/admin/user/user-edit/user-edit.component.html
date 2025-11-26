@@ -48,5 +48,22 @@
         </div>
       </div>
     </form>
+
+    <div *ngIf="editMode" class="mt-4">
+      <h3>Assign Roles</h3>
+      <div class="form-check" *ngFor="let role of allRoles">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [id]="'role-' + role.id"
+          [checked]="isRoleSelected(role.id)"
+          (change)="onRoleChange(role.id, $event)"
+        >
+        <label class="form-check-label" [for]="'role-' + role.id">
+          {{role.name}}
+        </label>
+      </div>
+      <button type="button" class="btn btn-primary mt-2" (click)="onAssignRoles()">Save Roles</button>
+    </div>
   </div>
 </div>

@@ -38,6 +38,11 @@ export function roleReducer(
         ...state,
         role: action.payload
       }
+    case RoleActions.CLEAR_ROLE:
+      return {
+        ...state,
+        role: new Role()
+      }
     default:
       return state
   }

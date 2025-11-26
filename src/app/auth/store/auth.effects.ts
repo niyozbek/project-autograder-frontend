@@ -93,9 +93,10 @@ export class AuthEffects {
   authSuccess = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS, AuthActions.LOGOUT),
     tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-      // TODO: why this function is working after clicking logout
       if(authSuccessAction.payload && authSuccessAction.payload.redirect){
-        this.router.navigate(['/' + authSuccessAction.payload.role.toLowerCase()])
+        const role = authSuccessAction.payload.role.toUpperCase();
+        const route = role === 'ADMIN' ? '/admin' : '/client';
+        this.router.navigate([route]);
       }
     })
   )

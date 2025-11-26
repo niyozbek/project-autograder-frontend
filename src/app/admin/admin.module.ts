@@ -25,6 +25,8 @@ import {ProblemEffects} from "./problem/problem.effects";
 import {SubmissionEffects} from "./submission/submission.effects";
 import {TestCaseEffects} from "./test-case/test-case.effects";
 import { RoleComponent } from './role/role.component';
+import {RoleViewComponent} from "./role/role-view/role-view.component";
+import {RoleEditComponent} from "./role/role-edit/role-edit.component";
 import {RoleEffects} from "./role/role.effects";
 import {PermissionComponent} from "./permission/permission.component";
 import {PermissionEffects} from "./permission/permission.effects";
@@ -42,6 +44,8 @@ import {PermissionEffects} from "./permission/permission.effects";
     ProblemTestCaseComponent,
     ProblemTestCaseEditComponent,
     RoleComponent,
+    RoleViewComponent,
+    RoleEditComponent,
     PermissionComponent
   ],
   imports: [
