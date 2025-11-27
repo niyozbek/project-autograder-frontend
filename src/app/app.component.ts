@@ -6,6 +6,7 @@ import * as AuthActions from './auth/store/auth.actions'
 import {map} from "rxjs/operators";
 
 @Component({
+  standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

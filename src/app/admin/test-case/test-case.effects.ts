@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap} from 'rxjs/operators'
 import * as TestCaseActions from './test-case.actions'
 import {TestCase} from "./test-case.model";
@@ -10,8 +10,7 @@ import {environment} from "../../../environments/environment";
 export class TestCaseEffects {
   apiUrl = environment.apiUrl + '/api/test-cases'
 
-  @Effect()
-  getTestCases = this.actions$.pipe(
+  getTestCases = createEffect(() => this.actions$.pipe(
     ofType(TestCaseActions.GET_TEST_CASES),
     switchMap((params: TestCaseActions.GetTestCases) => {
       return this.http
@@ -29,10 +28,9 @@ export class TestCaseEffects {
     map(testCases => {
       return new TestCaseActions.LoadTestCases(testCases)
     })
-  )
+  ))
 
-  @Effect()
-  addTestCase = this.actions$.pipe(
+  addTestCase = createEffect(() => this.actions$.pipe(
     ofType(TestCaseActions.ADD_TEST_CASE),
     switchMap((params: TestCaseActions.AddTestCase) => {
       return this.http
@@ -48,7 +46,7 @@ export class TestCaseEffects {
     map(testCase => {
       return new TestCaseActions.LoadTestCase(testCase)
     })
-  )
+  ))
 
   constructor(
     private actions$: Actions,

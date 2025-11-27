@@ -9,6 +9,7 @@ import * as fromAdmin from "../../admin.reducer";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-admin-problem-edit',
   templateUrl: './problem-edit.component.html',
 })

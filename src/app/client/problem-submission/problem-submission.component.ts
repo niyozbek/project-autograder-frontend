@@ -10,6 +10,7 @@ import * as fromApp from "../../store/app.reducer";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-client-problem-submission',
   templateUrl: './problem-submission.component.html'
 })

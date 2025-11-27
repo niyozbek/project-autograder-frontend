@@ -8,6 +8,7 @@ import * as fromApp from '../store/app.reducer'
 import * as AuthActions from './store/auth.actions'
 
 @Component({
+  standalone: false,
   selector: 'app-auth',
   templateUrl: './auth.component.html'
 })

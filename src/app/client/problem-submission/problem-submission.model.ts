@@ -19,6 +19,7 @@ export const STATUSES: { [key: string]: StatusMap } = {
   INIT: {label: '', labelStyle: ''},
   NEW: {label: 'New', labelStyle: 'badge badge-primary'},
   WRONG_ANSWER: {label: 'Wrong Answer', labelStyle: 'badge badge-warning'},
+  PROCESSING: {label: 'Processing', labelStyle: 'badge badge-info'},
   COMPILE_ERROR: {label: 'Compilation Error', labelStyle: 'badge badge-danger'},
   ACCEPTED: {label: 'Accepted', labelStyle: 'badge badge-success'}
 }

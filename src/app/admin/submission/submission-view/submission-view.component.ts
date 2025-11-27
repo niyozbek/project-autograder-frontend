@@ -9,6 +9,7 @@ import {SubmissionTest} from "../submission-test.model";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-admin-submission',
   templateUrl: './submission-view.component.html',
 })

@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap} from 'rxjs/operators'
 import * as ProblemActions from './problem.actions'
 import * as SubmissionActions from '../problem-submission/problem-submission.actions'
@@ -13,8 +13,7 @@ import {environment} from "../../../environments/environment";
 export class ProblemEffects {
   apiUrl = environment.apiUrl + '/api'
 
-  @Effect()
-  getProblems = this.actions$.pipe(
+  getProblems = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.GET_PROBLEMS),
     switchMap((params: ProblemActions.GetProblems) => {
       return this.http
@@ -31,10 +30,9 @@ export class ProblemEffects {
     map(problems => {
       return new ProblemActions.LoadProblems(problems)
     })
-  )
+  ))
 
-  @Effect()
-  getProblemDetail = this.actions$.pipe(
+  getProblemDetail = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.GET_PROBLEM_DETAIL),
     switchMap((params: ProblemActions.GetProblemDetail) => {
       return this.http
@@ -45,10 +43,9 @@ export class ProblemEffects {
     map(problem => {
       return new ProblemActions.LoadProblemDetail(problem)
     })
-  )
+  ))
 
-  @Effect()
-  submitSolution = this.actions$.pipe(
+  submitSolution = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.SUBMIT_SOLUTION),
     switchMap((params: ProblemActions.SubmitSolution) => {
       return this.http
@@ -66,10 +63,9 @@ export class ProblemEffects {
     map(submission => {
       return new SubmissionActions.LoadSubmissionWindow(submission)
     })
-  )
+  ))
 
-  @Effect()
-  getRuntimes = this.actions$.pipe(
+  getRuntimes = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.GET_RUNTIMES),
     switchMap((params: ProblemActions.GetRuntimes) => {
       return this.http
@@ -80,7 +76,7 @@ export class ProblemEffects {
     map(runtimes => {
       return new ProblemActions.LoadRuntimes(runtimes)
     })
-  )
+  ))
 
   constructor(
     private actions$: Actions,

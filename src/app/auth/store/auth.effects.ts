@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { of } from 'rxjs'
 import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { AuthService } from '../auth.service'
@@ -35,7 +35,7 @@ const handleAuthentication = (username: string, role: string, token: string) => 
   })
 }
 
-const handleError = (errorResponse) => {
+const handleError = (errorResponse: any) => {
   // error handling code
   let errorMessage = 'An unknown error occurred!'
   if (!errorResponse.error || !errorResponse.error.error) {
@@ -62,8 +62,7 @@ export class AuthEffects {
   apiUrl = environment.apiUrl + '/auth/'
 
   // this authLogin observable should never die, therefore never throw error
-  @Effect()
-  authLogin = this.actions$.pipe(
+  authLogin = createEffect(() => this.actions$.pipe(
     // login start triggers this authLogin
     ofType(AuthActions.LOGIN_START),
     switchMap((authData: AuthActions.LoginStart) => {
@@ -85,12 +84,9 @@ export class AuthEffects {
         })
       )
     }),
+  ))
 
-
-  )
-
-  @Effect({ dispatch: false })
-  authSuccess = this.actions$.pipe(
+  authSuccess = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS, AuthActions.LOGOUT),
     tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
       if(authSuccessAction.payload && authSuccessAction.payload.redirect){
@@ -99,10 +95,9 @@ export class AuthEffects {
         this.router.navigate([route]);
       }
     })
-  )
+  ), { dispatch: false })
 
-  @Effect()
-  autoLogin = this.actions$.pipe(
+  autoLogin = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.AUTO_LOGIN),
     map(() => {
 
@@ -124,6 +119,9 @@ export class AuthEffects {
 
       if (loadedUser.token) {
         const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+        if (expirationDuration <= 0) {
+          return { type: 'DUMMY' }
+        }
         this.authService.setLogoutTimer(expirationDuration)
 
         return new AuthActions.AuthenticateSuccess({
@@ -136,17 +134,16 @@ export class AuthEffects {
       }
       return { type: 'DUMMY' }
     })
-  )
+  ))
 
-  @Effect({ dispatch: false })
-  authLogout = this.actions$.pipe(
+  authLogout = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.LOGOUT),
     tap(() => {
       this.authService.clearLogoutTimer()
       localStorage.removeItem('userData')
       this.router.navigate(['/auth'])
     })
-  )
+  ), { dispatch: false })
 
   // $ - observable, optional
   constructor(

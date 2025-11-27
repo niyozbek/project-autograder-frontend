@@ -7,6 +7,7 @@ import * as MySubmissionsActions from './my-submissions.actions';
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-my-submissions',
   templateUrl: './my-submissions.component.html',
 })

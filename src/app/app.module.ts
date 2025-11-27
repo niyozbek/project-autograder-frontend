@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http'
 import {EffectsModule} from '@ngrx/effects'
 import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import {AppComponent} from './app.component';
@@ -25,8 +25,7 @@ import {HomeComponent} from "./home/home.component";
     HomeComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'serverApp'}),
-    HttpClientModule,
+    BrowserModule,
     AppRoutingModule,
     SharedModule,
     CoreModule,
@@ -35,6 +34,9 @@ import {HomeComponent} from "./home/home.component";
     StoreDevtoolsModule.instrument({logOnly: environment.production}),
     StoreRouterConnectingModule.forRoot(),
     BrowserAnimationsModule
+  ],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })

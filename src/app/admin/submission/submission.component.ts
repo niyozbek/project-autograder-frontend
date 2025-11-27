@@ -9,6 +9,7 @@ import {Submission} from "./submission.model";
 import * as SubmissionActions from './submission.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-submission',
   templateUrl: './submission.component.html',
 })

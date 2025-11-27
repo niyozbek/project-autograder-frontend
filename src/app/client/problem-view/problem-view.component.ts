@@ -11,6 +11,7 @@ import {Runtime} from '../problem/runtime.model';
 import {Submission} from "../problem-submission/problem-submission.model";
 
 @Component({
+  standalone: false,
   selector: 'app-client-problem-view',
   templateUrl: './problem-view.component.html',
 })

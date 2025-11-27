@@ -2,18 +2,19 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as SubmissionActions from '../problem-submission/problem-submission.actions';
 import {ActivatedRoute, Router} from "@angular/router";
-import {map} from "rxjs/operators";
+import {filter, map, take} from "rxjs/operators";
 import {STATUSES, Submission} from "../problem-submission/problem-submission.model";
 import {SubmissionTest} from "./problem-test.model";
 import * as fromClient from "../client.reducer";
 import {Subscription} from "rxjs";
 import {Stomp} from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';
+import SockJS from 'sockjs-client';
 import {TestResultModel} from "./test-result.model";
 import {ThemePalette} from "@angular/material/core";
 import {environment} from "../../../environments/environment";
 
 @Component({
+  standalone: false,
   selector: 'app-client-submission',
   templateUrl: './problem-test.component.html',
 })
@@ -65,27 +66,38 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
     if (this.webSocketClient != null) {
       return
     }
-    const socket = new SockJS(environment.apiUrl + '/ws/submissions');
-    this.webSocketClient = Stomp.over(socket);
 
-    const _this = this;
-    this.webSocketClient.connect({}, function (frame) {
-      console.log('Connected: ' + frame);
-      _this.webSocketClient.subscribe('/topic/test-results', function (testResult) {
-        _this.testResult = JSON.parse(testResult.body)
-        _this.showProgress();
-        // progressRequest is needed so that code stops in case submission gets stuck
-        if (_this.testResult.status == 'COMPLETED') {
-          _this.color = 'accent'
-          clearInterval(_this.progressInterval)
-          _this.store.dispatch(new SubmissionActions.GetSubmission({submissionId: _this.id}))
-          _this.store.dispatch(new SubmissionActions.GetSubmissionTests({submissionId: _this.id}))
-        }
+    this.store.select('auth').pipe(
+      map(authState => authState.user),
+      filter(user => !!user),
+      take(1)
+    ).subscribe(user => {
+      const token = user.token;
+      const url = environment.apiUrl + '/ws/submissions' + (token ? '?access_token=' + token : '');
+      const socket = new SockJS(url);
+      this.webSocketClient = Stomp.over(socket);
+
+      const _this = this;
+      this.webSocketClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        _this.webSocketClient.subscribe('/topic/test-results', function (testResult) {
+          _this.testResult = JSON.parse(testResult.body)
+          _this.showProgress();
+          // Stop polling when any terminal status is reached
+          const terminalStatuses = ['COMPLETED', 'ACCEPTED', 'WRONG_ANSWER', 'COMPILE_ERROR'];
+          if (terminalStatuses.includes(_this.testResult.status)) {
+            _this.color = 'accent'
+            clearInterval(_this.progressInterval)
+            _this.disconnectFromWebSocket()
+            _this.store.dispatch(new SubmissionActions.GetSubmission({submissionId: _this.id}))
+            _this.store.dispatch(new SubmissionActions.GetSubmissionTests({submissionId: _this.id}))
+          }
+        });
+        // update every 1000 seconds
+        _this.progressInterval = setInterval(() => {
+          _this.requestTestResult();
+        }, 1000)
       });
-      // update every 1000 seconds
-      _this.progressInterval = setInterval(() => {
-        _this.requestTestResult();
-      }, 1000)
     });
   }
 
