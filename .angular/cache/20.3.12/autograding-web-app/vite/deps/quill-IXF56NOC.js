@@ -17980,8 +17980,19 @@ core_default.register({
   "ui/tooltip": tooltip_default
 }, true);
 var quill_default = core_default;
+var export_AttributeMap = import_quill_delta9.AttributeMap;
+var export_Delta = import_quill_delta9.default;
+var export_Op = import_quill_delta9.Op;
+var export_OpIterator = import_quill_delta9.OpIterator;
 export {
-  quill_default as Quill
+  export_AttributeMap as AttributeMap,
+  export_Delta as Delta,
+  module_default as Module,
+  export_Op as Op,
+  export_OpIterator as OpIterator,
+  parchment_exports as Parchment,
+  Range,
+  quill_default as default
 };
 /*! Bundled license information:
 
@@ -17997,4 +18008,4 @@ lodash-es/lodash.js:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=ngx-quill-quill-CUw8Q_m0-Y6JMYMRF.js.map
+//# sourceMappingURL=quill-IXF56NOC.js.map

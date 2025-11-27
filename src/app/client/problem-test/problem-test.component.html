@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <td>Status</td>
-        <td><span style="font-size: 14px" class="{{statusMap.labelStyle}}">{{statusMap.label}}</span></td>
+        <td><span class="{{statusMap.labelStyle}} text-white px-3 py-2" style="font-size: 16px; font-weight: 600; border-radius: 4px; display: inline-block;">{{statusMap.label}}</span></td>
       </tr>
       <tr>
         <td>Output</td>
@@ -77,8 +77,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let submissionTest of submissionTests; let i = index"
-          class="{{submissionTest.testCaseIsPassed?'bg-success':'bg-danger'}}">
+        <tr *ngFor="let submissionTest of submissionTests; let i = index"
+        [ngClass]="{
+          'table-success': submissionTest.testCaseIsPassed,
+          'table-danger': !submissionTest.testCaseIsPassed
+        }">
         <td>{{submissionTest.id}} </td>
         <td>{{submissionTest.submissionId}} </td>
         <td>{{submissionTest.input}} </td>

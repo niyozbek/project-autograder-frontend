@@ -17,7 +17,7 @@ export class ProblemSubmissionEffects {
     ofType(SubmissionAction.GET_SUBMISSIONS),
     switchMap((params: SubmissionAction.GetSubmissions) => {
       return this.http
-        .get<Submission[]>(
+        .get<any>(
           this.apiUrl,
           {
             params: {
@@ -28,8 +28,8 @@ export class ProblemSubmissionEffects {
           }
         )
     }),
-    map(submissions => {
-      return new SubmissionAction.LoadSubmissions(submissions)
+    map((page: { content: Submission[] }) => {
+      return new SubmissionAction.LoadSubmissions(page.content)
     })
   ))
 

@@ -31,7 +31,9 @@ export class ProblemTestComponent implements OnInit, OnDestroy {
   testResult: TestResultModel
   progress = 0
   progressInterval
-  color: ThemePalette = 'primary';
+  // const isSuccess = ['ACCEPTED', 'COMPLETED'].includes(_this.testResult.status);
+  color: ThemePalette = 'accent';
+  
 
   constructor(
     private route: ActivatedRoute,

@@ -25,7 +25,9 @@
         <td>{{submission.filename}}</td>
         <td>{{submission.userId}}</td>
         <td>{{submission.code}}</td>
-        <td>{{submission.status}}</td>
+        <td>
+          <span [class]="getStatusStyle(submission.status) + ' text-white px-2 py-1'" style="font-weight: 600; border-radius: 4px; display: inline-block;">{{getStatusLabel(submission.status)}}</span>
+        </td>
         <td>{{submission.grade}}</td>
         <td><a class="btn btn-info" href="#" [routerLink]="baseRoute + '/' + submission.id">View</a></td>
       </tr>

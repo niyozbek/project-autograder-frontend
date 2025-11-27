@@ -15,7 +15,7 @@ export class SubmissionEffects {
     ofType(SubmissionAction.GET_SUBMISSIONS),
     switchMap((params: SubmissionAction.GetSubmissions) => {
       return this.http
-        .get<Submission[]>(
+        .get<any>(
           this.apiUrl,
           {
             params: {
@@ -25,8 +25,8 @@ export class SubmissionEffects {
           }
         )
     }),
-    map(submissions => {
-      return new SubmissionAction.LoadSubmissions(submissions)
+    map((page: { content: Submission[] }) => {
+      return new SubmissionAction.LoadSubmissions(page.content)
     })
   ))
 
@@ -34,7 +34,7 @@ export class SubmissionEffects {
     ofType(SubmissionAction.GET_SUBMISSIONS_BY_PROBLEM_ID),
     switchMap((params: SubmissionAction.GetSubmissionsByProblemId) => {
       return this.http
-        .get<Submission[]>(
+        .get<any>(
           this.apiUrl,
           {
             params: {
@@ -45,8 +45,8 @@ export class SubmissionEffects {
           }
         )
     }),
-    map(submissions => {
-      return new SubmissionAction.LoadSubmissions(submissions)
+    map((page: { content: Submission[] }) => {
+      return new SubmissionAction.LoadSubmissions(page.content)
     })
   ))
 

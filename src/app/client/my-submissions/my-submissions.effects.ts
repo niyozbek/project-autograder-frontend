@@ -13,7 +13,7 @@ export class MySubmissionsEffects {
   getMySubmissions = createEffect(() => this.actions$.pipe(
     ofType(MySubmissionsActions.GET_MY_SUBMISSIONS),
     switchMap((params: MySubmissionsActions.GetMySubmissions) => {
-      return this.http.get<MySubmission[]>(
+      return this.http.get<any>(
         this.apiUrl + '/own',
         {
           params: {
@@ -23,8 +23,8 @@ export class MySubmissionsEffects {
         }
       );
     }),
-    map(submissions => {
-      return new MySubmissionsActions.LoadMySubmissions(submissions);
+    map((page: { content: MySubmission[] }) => {
+      return new MySubmissionsActions.LoadMySubmissions(page.content);
     })
   ));
 
