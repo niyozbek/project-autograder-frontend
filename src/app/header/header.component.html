@@ -1,51 +1,52 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="/favicon.ico" width="28" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-    Auto Grader
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav mr-auto">
-      <!-- Admin Menu: Full access for ADMIN only -->
-      <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isAuthenticated && isAdmin">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          Admin
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#" routerLink="/admin/users">Users</a>
-          <a class="dropdown-item" href="#" routerLink="/admin/problems">Create Problem</a>
-          <a class="dropdown-item" href="#" routerLink="/admin/submissions">Submissions</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" routerLink="/admin/roles">Roles</a>
-          <a class="dropdown-item" href="#" routerLink="/admin/permissions">Permissions</a>
-        </div>
-      </li>
-      <!-- Lecturer Menu: Problems, Submissions, Roles only -->
-      <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isAuthenticated && isLecturer">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          Manage
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#" routerLink="/admin/problems">Create Problem</a>
-          <a class="dropdown-item" href="#" routerLink="/admin/submissions">Submissions</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" routerLink="/admin/roles">Roles</a>
-        </div>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" href="#" routerLink="/client/problems">Problems</a></li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" href="#" routerLink="/client/submissions">My Submissions</a></li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated"><a class="nav-link" href="#" routerLink="/auth">Authenticate</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link" routerLink="/client/profile">Profile</a>
-      </li>
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
-      </li>
-    </ul>
-
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/favicon.ico" width="28" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      Auto Grader
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto">
+        <!-- Admin Menu: Full access for ADMIN only -->
+        <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isAuthenticated && isAdmin">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/admin/users">Users</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/problems">Create Problem</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/submissions">Submissions</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/admin/roles">Roles</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/permissions">Permissions</a></li>
+          </ul>
+        </li>
+        <!-- Lecturer Menu: Problems, Submissions, Roles only -->
+        <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isAuthenticated && isLecturer">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/admin/problems">Create Problem</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/submissions">Submissions</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/admin/roles">Roles</a></li>
+          </ul>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" routerLink="/client/problems">Problems</a></li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a class="nav-link" routerLink="/client/submissions">My Submissions</a></li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated"><a class="nav-link" routerLink="/auth">Authenticate</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/client/profile">Profile</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

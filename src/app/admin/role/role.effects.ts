@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap, tap} from 'rxjs/operators'
 import * as RoleActions from './role.actions'
 import {Role} from "./role.model";
@@ -11,8 +11,7 @@ import {Router} from "@angular/router";
 export class RoleEffects {
   apiUrl = environment.apiUrl + '/api/roles'
 
-  @Effect()
-  getRoles = this.actions$.pipe(
+  getRoles = createEffect(() => this.actions$.pipe(
     ofType(RoleActions.GET_ROLES),
     switchMap((params: RoleActions.GetRoles) => {
       return this.http
@@ -29,10 +28,9 @@ export class RoleEffects {
     map(roles => {
       return new RoleActions.LoadRoles(roles)
     })
-  )
+  ))
 
-  @Effect()
-  getRole = this.actions$.pipe(
+  getRole = createEffect(() => this.actions$.pipe(
     ofType(RoleActions.GET_ROLE),
     switchMap((params: RoleActions.GetRole) => {
       return this.http
@@ -43,10 +41,9 @@ export class RoleEffects {
     map(role => {
       return new RoleActions.LoadRole(role)
     })
-  )
+  ))
 
-  @Effect({dispatch: false})
-  createRole = this.actions$.pipe(
+  createRole = createEffect(() => this.actions$.pipe(
     ofType(RoleActions.CREATE_ROLE),
     switchMap((action: RoleActions.CreateRole) => {
       return this.http.post<Role>(this.apiUrl, action.payload)
@@ -54,10 +51,9 @@ export class RoleEffects {
     tap(() => {
       this.router.navigate(['/admin/roles'])
     })
-  )
+  ), {dispatch: false})
 
-  @Effect({dispatch: false})
-  updateRole = this.actions$.pipe(
+  updateRole = createEffect(() => this.actions$.pipe(
     ofType(RoleActions.UPDATE_ROLE),
     switchMap((action: RoleActions.UpdateRole) => {
       return this.http.put<Role>(this.apiUrl + '/' + action.payload.id, action.payload)
@@ -65,10 +61,9 @@ export class RoleEffects {
     tap(() => {
       this.router.navigate(['/admin/roles'])
     })
-  )
+  ), {dispatch: false})
 
-  @Effect()
-  deleteRole = this.actions$.pipe(
+  deleteRole = createEffect(() => this.actions$.pipe(
     ofType(RoleActions.DELETE_ROLE),
     switchMap((action: RoleActions.DeleteRole) => {
       return this.http.delete(this.apiUrl + '/' + action.payload.id)
@@ -76,7 +71,7 @@ export class RoleEffects {
     map(() => {
       return new RoleActions.GetRoles({pageIndex: 0, pageSize: 10})
     })
-  )
+  ))
 
   constructor(
     private actions$: Actions,

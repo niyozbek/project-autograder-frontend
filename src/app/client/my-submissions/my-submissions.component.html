@@ -19,7 +19,9 @@
         </td>
         <td>{{submission.language}} ({{submission.version}})</td>
         <td>
-          <span [class]="getStatusStyle(submission.status)">{{getStatusLabel(submission.status)}}</span>
+          <span [ngClass]="getStatusStyle(submission?.status)">
+            {{getStatusLabel(submission?.status)}}
+          </span>
         </td>
         <td>
           <a class="btn btn-outline-info btn-sm" routerLink="/client/submissions/{{submission.id}}">View</a>

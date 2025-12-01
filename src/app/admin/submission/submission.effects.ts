@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap} from 'rxjs/operators'
 import * as SubmissionAction from './submission.actions'
 import {Submission} from "./submission.model";
@@ -11,12 +11,11 @@ import {environment} from "../../../environments/environment";
 export class SubmissionEffects {
   apiUrl = environment.apiUrl + '/api/submissions'
 
-  @Effect()
-  getSubmissions = this.actions$.pipe(
+  getSubmissions = createEffect(() => this.actions$.pipe(
     ofType(SubmissionAction.GET_SUBMISSIONS),
     switchMap((params: SubmissionAction.GetSubmissions) => {
       return this.http
-        .get<Submission[]>(
+        .get<any>(
           this.apiUrl,
           {
             params: {
@@ -26,17 +25,16 @@ export class SubmissionEffects {
           }
         )
     }),
-    map(submissions => {
-      return new SubmissionAction.LoadSubmissions(submissions)
+    map((page: { content: Submission[] }) => {
+      return new SubmissionAction.LoadSubmissions(page.content)
     })
-  )
+  ))
 
-  @Effect()
-  getSubmissionsByProblemId = this.actions$.pipe(
+  getSubmissionsByProblemId = createEffect(() => this.actions$.pipe(
     ofType(SubmissionAction.GET_SUBMISSIONS_BY_PROBLEM_ID),
     switchMap((params: SubmissionAction.GetSubmissionsByProblemId) => {
       return this.http
-        .get<Submission[]>(
+        .get<any>(
           this.apiUrl,
           {
             params: {
@@ -47,13 +45,12 @@ export class SubmissionEffects {
           }
         )
     }),
-    map(submissions => {
-      return new SubmissionAction.LoadSubmissions(submissions)
+    map((page: { content: Submission[] }) => {
+      return new SubmissionAction.LoadSubmissions(page.content)
     })
-  )
+  ))
 
-  @Effect()
-  getSubmission = this.actions$.pipe(
+  getSubmission = createEffect(() => this.actions$.pipe(
     ofType(SubmissionAction.GET_SUBMISSION),
     switchMap((params: SubmissionAction.GetSubmission) => {
       return this.http
@@ -64,10 +61,9 @@ export class SubmissionEffects {
     map(submission => {
       return new SubmissionAction.LoadSubmission(submission)
     })
-  )
+  ))
 
-  @Effect()
-  getSubmissionTests = this.actions$.pipe(
+  getSubmissionTests = createEffect(() => this.actions$.pipe(
     ofType(SubmissionAction.GET_SUBMISSION_TESTS),
     switchMap((params: SubmissionAction.GetSubmissionTests) => {
       return this.http
@@ -78,7 +74,7 @@ export class SubmissionEffects {
     map(submissionTests => {
       return new SubmissionAction.LoadSubmissionTests(submissionTests)
     })
-  )
+  ))
 
   constructor(
     private actions$: Actions,

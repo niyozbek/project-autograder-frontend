@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap, tap} from 'rxjs/operators'
 import * as UserActions from './user.actions'
 import {User} from "./user.model";
@@ -11,8 +11,7 @@ import {Router} from "@angular/router";
 export class UserEffects {
   apiUrl = environment.apiUrl + '/api'
 
-  @Effect()
-  getUsers = this.actions$.pipe(
+  getUsers = createEffect(() => this.actions$.pipe(
     ofType(UserActions.GET_USERS),
     switchMap((params: UserActions.GetUsers) => {
       return this.http
@@ -29,10 +28,9 @@ export class UserEffects {
     map(users => {
       return new UserActions.LoadUsers(users)
     })
-  )
+  ))
 
-  @Effect()
-  getUser = this.actions$.pipe(
+  getUser = createEffect(() => this.actions$.pipe(
     ofType(UserActions.GET_USER),
     switchMap((params: UserActions.GetUser) => {
       return this.http
@@ -43,10 +41,9 @@ export class UserEffects {
     map(user => {
       return new UserActions.LoadUser(user)
     })
-  )
+  ))
 
-  @Effect()
-  createUser = this.actions$.pipe(
+  createUser = createEffect(() => this.actions$.pipe(
     ofType(UserActions.CREATE_USER),
     switchMap((body: UserActions.CreateUser) => {
       return this.http
@@ -62,10 +59,9 @@ export class UserEffects {
     map(user => {
       return new UserActions.LoadUser(user)
     })
-  )
+  ))
 
-  @Effect()
-  updateUser = this.actions$.pipe(
+  updateUser = createEffect(() => this.actions$.pipe(
     ofType(UserActions.UPDATE_USER),
     switchMap((body: UserActions.UpdateUser) => {
       return this.http
@@ -77,10 +73,9 @@ export class UserEffects {
     map(user => {
       return new UserActions.LoadUser(user)
     })
-  )
+  ))
 
-  @Effect({dispatch: false})
-  assignRoles = this.actions$.pipe(
+  assignRoles = createEffect(() => this.actions$.pipe(
     ofType(UserActions.ASSIGN_ROLES),
     switchMap((action: UserActions.AssignRoles) => {
       return this.http.put<User>(
@@ -91,7 +86,7 @@ export class UserEffects {
     tap(() => {
       this.router.navigate(['/admin/users'])
     })
-  )
+  ), {dispatch: false})
 
   constructor(
     private actions$: Actions,

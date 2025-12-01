@@ -6,6 +6,7 @@ import * as fromApp from '../store/app.reducer'
 import * as AuthActions from '../auth/store/auth.actions'
 
 @Component({
+  standalone: false,
   selector: 'app-header',
   templateUrl: './header.component.html'
 })

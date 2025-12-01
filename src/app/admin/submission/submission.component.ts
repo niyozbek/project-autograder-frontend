@@ -5,10 +5,11 @@ import * as fromAdmin from "../admin.reducer";
 import {map} from "rxjs/operators";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
-import {Submission} from "./submission.model";
+import {Submission, STATUSES} from "./submission.model";
 import * as SubmissionActions from './submission.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-submission',
   templateUrl: './submission.component.html',
 })
@@ -38,6 +39,14 @@ export class SubmissionComponent implements OnInit, OnDestroy {
       pageIndex: 0,
       pageSize: 10
     }))
+  }
+
+  getStatusLabel(status: string): string {
+    return STATUSES[status]?.label || status;
+  }
+
+  getStatusStyle(status: string): string {
+    return STATUSES[status]?.labelStyle || '';
   }
 
   getServerData($event: PageEvent) {

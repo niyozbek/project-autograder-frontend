@@ -11,26 +11,34 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/autograding-web-app/browser",
+            "outputPath": "dist/autograding-web-app",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min/vs",
+                "output": "assets/monaco/min/vs"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "assets/monaco/min-maps"
+              }
             ],
             "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
@@ -57,12 +65,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -71,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "autograding-web-app:build:production"
+              "buildTarget": "autograding-web-app:build:production"
             },
             "development": {
-              "browserTarget": "autograding-web-app:build:development"
+              "buildTarget": "autograding-web-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,14 +87,13 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "autograding-web-app:build"
+            "buildTarget": "autograding-web-app:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
@@ -97,72 +101,16 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/autograding-web-app/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            },
-            "development": {
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "autograding-web-app:build:development",
-              "serverTarget": "autograding-web-app:server:development"
-            },
-            "production": {
-              "browserTarget": "autograding-web-app:build:production",
-              "serverTarget": "autograding-web-app:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "autograding-web-app:build:production",
-              "serverTarget": "autograding-web-app:server:production"
-            },
-            "development": {
-              "browserTarget": "autograding-web-app:build:development",
-              "serverTarget": "autograding-web-app:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }
   },
-  "defaultProject": "autograding-web-app"
+  "cli": {
+    "analytics": false
+  }
 }

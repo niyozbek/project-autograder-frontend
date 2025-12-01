@@ -9,6 +9,7 @@ import {PageEvent} from "@angular/material/paginator";
 import * as RoleActions from './role.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-role',
   templateUrl: './role.component.html'
 })

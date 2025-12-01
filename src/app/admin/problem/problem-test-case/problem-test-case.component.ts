@@ -9,6 +9,7 @@ import {TestCase} from "../../test-case/test-case.model";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-admin-problem-test-case',
   templateUrl: './problem-test-case.component.html'
 })

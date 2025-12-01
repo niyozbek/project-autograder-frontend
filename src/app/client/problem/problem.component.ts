@@ -8,6 +8,7 @@ import {map} from "rxjs/operators";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-client-problem',
   templateUrl: './problem.component.html',
 })

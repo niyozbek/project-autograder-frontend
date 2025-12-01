@@ -12,6 +12,7 @@ import {map, switchMap} from "rxjs/operators";
 import { Location } from '@angular/common';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-user-edit',
   templateUrl: './user-edit.component.html'
 })

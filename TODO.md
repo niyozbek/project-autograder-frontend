@@ -1,7 +1,7 @@
 # Common
 [] own-profilems route
   [] get all
-[] update
+[] update 
   [] view
   [] update
 [DONE] set proper permissions_enum, and buttons should be visible depending on that

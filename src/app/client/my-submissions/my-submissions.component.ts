@@ -7,6 +7,7 @@ import * as MySubmissionsActions from './my-submissions.actions';
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-my-submissions',
   templateUrl: './my-submissions.component.html',
 })
@@ -34,11 +35,11 @@ export class MySubmissionsComponent implements OnInit, OnDestroy {
   }
 
   getStatusLabel(status: string): string {
-    return STATUSES[status]?.label || status;
+    return STATUSES[status]?.label || status || 'Unknown';
   }
 
   getStatusStyle(status: string): string {
-    return STATUSES[status]?.labelStyle || '';
+    return STATUSES[status]?.labelStyle || 'badge badge-secondary';
   }
 
   getServerData($event: PageEvent) {

@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, switchMap} from 'rxjs/operators';
 import * as MySubmissionsActions from './my-submissions.actions';
 import {MySubmission} from "./my-submissions.model";
@@ -10,11 +10,10 @@ import {environment} from "../../../environments/environment";
 export class MySubmissionsEffects {
   apiUrl = environment.apiUrl + '/api/submissions';
 
-  @Effect()
-  getMySubmissions = this.actions$.pipe(
+  getMySubmissions = createEffect(() => this.actions$.pipe(
     ofType(MySubmissionsActions.GET_MY_SUBMISSIONS),
     switchMap((params: MySubmissionsActions.GetMySubmissions) => {
-      return this.http.get<MySubmission[]>(
+      return this.http.get<any>(
         this.apiUrl + '/own',
         {
           params: {
@@ -24,10 +23,10 @@ export class MySubmissionsEffects {
         }
       );
     }),
-    map(submissions => {
-      return new MySubmissionsActions.LoadMySubmissions(submissions);
+    map((page: { content: MySubmission[] }) => {
+      return new MySubmissionsActions.LoadMySubmissions(page.content);
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,
@@ -35,5 +34,3 @@ export class MySubmissionsEffects {
   ) {
   }
 }
-
-

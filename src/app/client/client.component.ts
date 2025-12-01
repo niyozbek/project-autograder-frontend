@@ -5,6 +5,7 @@ import {map, take} from "rxjs/operators";
 import {Subscription} from "rxjs";
 
 @Component({
+  standalone: false,
   selector: 'app-client',
   templateUrl: './client.component.html',
 })

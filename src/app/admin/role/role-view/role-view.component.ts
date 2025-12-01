@@ -9,6 +9,7 @@ import {Subscription} from "rxjs";
 import {Location} from '@angular/common';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-role-view',
   templateUrl: './role-view.component.html',
 })

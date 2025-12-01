@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Actions, Effect, ofType} from '@ngrx/effects'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
 import {map, switchMap} from 'rxjs/operators'
 import * as ProblemActions from './problem.actions'
 import {Problem} from "./problem.model";
@@ -10,8 +10,7 @@ import {environment} from "../../../environments/environment";
 export class ProblemEffects {
   apiUrl = environment.apiUrl + '/api/problems'
 
-  @Effect()
-  getProblems = this.actions$.pipe(
+  getProblems = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.GET_PROBLEMS),
     switchMap((params: ProblemActions.GetProblems) => {
       return this.http
@@ -28,10 +27,9 @@ export class ProblemEffects {
     map(problems => {
       return new ProblemActions.LoadProblems(problems)
     })
-  )
+  ))
 
-  @Effect()
-  createProblem = this.actions$.pipe(
+  createProblem = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.CREATE_PROBLEM),
     switchMap((body: ProblemActions.CreateProblem) => {
       return this.http
@@ -46,10 +44,9 @@ export class ProblemEffects {
     map(problem => {
       return new ProblemActions.LoadProblem(problem)
     })
-  )
+  ))
 
-  @Effect()
-  updateProblem = this.actions$.pipe(
+  updateProblem = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.UPDATE_PROBLEM),
     switchMap((body: ProblemActions.UpdateProblem) => {
       return this.http
@@ -65,10 +62,9 @@ export class ProblemEffects {
     map(problem => {
       return new ProblemActions.LoadProblem(problem)
     })
-  )
+  ))
 
-  @Effect()
-  getProblemDetail = this.actions$.pipe(
+  getProblemDetail = createEffect(() => this.actions$.pipe(
     ofType(ProblemActions.GET_PROBLEM_DETAIL),
     switchMap((params: ProblemActions.GetProblemDetail) => {
       return this.http
@@ -79,7 +75,7 @@ export class ProblemEffects {
     map(problem => {
       return new ProblemActions.LoadProblemDetail(problem)
     })
-  )
+  ))
 
   constructor(
     private actions$: Actions,

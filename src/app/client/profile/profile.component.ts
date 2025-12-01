@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Component({
+  standalone: false,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
