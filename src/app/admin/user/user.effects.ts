@@ -1,11 +1,11 @@
-import {HttpClient} from '@angular/common/http'
-import {Injectable} from '@angular/core'
-import {Actions, createEffect, ofType} from '@ngrx/effects'
-import {map, switchMap, tap} from 'rxjs/operators'
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { map, switchMap, tap } from 'rxjs/operators'
 import * as UserActions from './user.actions'
-import {User} from "./user.model";
-import {environment} from "../../../environments/environment";
-import {Router} from "@angular/router";
+import { User } from "./user.model";
+import { environment } from "../../../environments/environment";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class UserEffects {
@@ -35,7 +35,7 @@ export class UserEffects {
     switchMap((params: UserActions.GetUser) => {
       return this.http
         .get<User>(
-          this.apiUrl + '/users/'+ params.payload.id
+          this.apiUrl + '/users/' + params.payload.id
         )
     }),
     map(user => {
@@ -52,7 +52,8 @@ export class UserEffects {
           {
             'username': body.payload.username,
             'password': body.payload.password,
-            'fullname': body.payload.fullname
+            'fullname': body.payload.fullname,
+            'email': body.payload.email
           }
         )
     }),
@@ -86,7 +87,7 @@ export class UserEffects {
     tap(() => {
       this.router.navigate(['/admin/users'])
     })
-  ), {dispatch: false})
+  ), { dispatch: false })
 
   constructor(
     private actions$: Actions,

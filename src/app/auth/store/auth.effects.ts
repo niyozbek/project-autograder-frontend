@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service'
 import { AuthUser } from '../auth-user.model'
 
 import * as AuthActions from './auth.actions'
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 export interface AuthResponseData {
   username: string,
@@ -89,7 +89,7 @@ export class AuthEffects {
   authSuccess = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS, AuthActions.LOGOUT),
     tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-      if(authSuccessAction.payload && authSuccessAction.payload.redirect){
+      if (authSuccessAction.payload && authSuccessAction.payload.redirect) {
         const role = authSuccessAction.payload.role.toUpperCase();
         const route = role === 'ADMIN' ? '/admin' : '/client';
         this.router.navigate([route]);
@@ -144,6 +144,41 @@ export class AuthEffects {
       this.router.navigate(['/auth'])
     })
   ), { dispatch: false })
+
+  forgotPassword = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.FORGOT_PASSWORD_START),
+    switchMap((action: AuthActions.ForgotPasswordStart) => {
+      return this.http.post<{ message: string }>(
+        this.apiUrl + 'forgot-password',
+        { email: action.payload.email }
+      ).pipe(
+        map(response => {
+          return new AuthActions.ForgotPasswordSuccess('If the email exists, a password reset link has been sent.')
+        }),
+        catchError(error => {
+          return of(new AuthActions.ForgotPasswordFail('Failed to send reset email. Please try again.'))
+        })
+      )
+    })
+  ))
+
+  resetPassword = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.RESET_PASSWORD_START),
+    switchMap((action: AuthActions.ResetPasswordStart) => {
+      return this.http.post<{ message: string }>(
+        this.apiUrl + 'reset-password',
+        { token: action.payload.token, newPassword: action.payload.newPassword }
+      ).pipe(
+        map(response => {
+          return new AuthActions.ResetPasswordSuccess('Password has been reset successfully. You can now login.')
+        }),
+        catchError(error => {
+          const message = error.error?.message || 'Failed to reset password. Token may be invalid or expired.'
+          return of(new AuthActions.ResetPasswordFail(message))
+        })
+      )
+    })
+  ))
 
   // $ - observable, optional
   constructor(

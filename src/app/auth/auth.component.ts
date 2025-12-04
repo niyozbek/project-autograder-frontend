@@ -1,9 +1,9 @@
-import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from "@angular/core";
-import {NgForm} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {Subscription} from "rxjs";
-import {AlertComponent} from "../shared/alert/alert.component";
-import {PlaceHolderDirective} from "../shared/placeholder/placeholder.directive";
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
+import { AlertComponent } from "../shared/alert/alert.component";
+import { PlaceHolderDirective } from "../shared/placeholder/placeholder.directive";
 import * as fromApp from '../store/app.reducer'
 import * as AuthActions from './store/auth.actions'
 
@@ -17,7 +17,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true
   isLoading = false
   error: string = null
-  @ViewChild(PlaceHolderDirective, {static: false}) alertHost: PlaceHolderDirective
+  successMessage: string = null
+  showForgotPassword = false
+  @ViewChild(PlaceHolderDirective, { static: false }) alertHost: PlaceHolderDirective
   private closeSub: Subscription
   private storeSub: Subscription
 
@@ -33,6 +35,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       .subscribe(authState => {
         this.isLoading = authState.loading
         this.error = authState.authError
+        this.successMessage = authState.successMessage
         if (this.error) {
           this.showErrorAlert(this.error)
         }
@@ -44,16 +47,31 @@ export class AuthComponent implements OnInit, OnDestroy {
       return
     }
 
-    // console.log(authForm)
     const username = authForm.value.username
     const password = authForm.value.password
 
-
-    // authObs = this.authService.login(email, password)
     this.store.dispatch(new AuthActions.LoginStart({
       username: username,
       password: password,
     }))
+  }
+
+  onForgotPassword() {
+    this.showForgotPassword = true
+    this.store.dispatch(new AuthActions.ClearError())
+  }
+
+  onBackToLogin() {
+    this.showForgotPassword = false
+    this.store.dispatch(new AuthActions.ClearError())
+  }
+
+  onSubmitForgotPassword(forgotForm: NgForm) {
+    if (!forgotForm.valid) {
+      return
+    }
+    const email = forgotForm.value.email
+    this.store.dispatch(new AuthActions.ForgotPasswordStart({ email }))
   }
 
   onHandleError() {
@@ -61,8 +79,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   private showErrorAlert(message: string) {
-    // angular doesnt get it
-    // const alertComponent = new AlertComponent()
     const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent)
     const hostViewContainerRef = this.alertHost.viewContainerRef
     hostViewContainerRef.clear()
@@ -70,7 +86,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     const componentRef = hostViewContainerRef.createComponent(alertComponentFactory)
 
     componentRef.instance.message = message
-    // only exception to subscribe to eventemitter
     this.closeSub = componentRef.instance.close.subscribe(() => {
       this.closeSub.unsubscribe()
       hostViewContainerRef.clear()
