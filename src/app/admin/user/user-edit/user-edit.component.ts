@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Store} from '@ngrx/store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import * as UserActions from '../../user/user.actions';
 import * as RoleActions from '../../role/role.actions';
 import * as fromAdmin from "../../admin.reducer";
-import {Subscription} from "rxjs";
-import {User} from "../user.model";
-import {Role} from "../../role/role.model";
-import {map, switchMap} from "rxjs/operators";
+import { Subscription } from "rxjs";
+import { User } from "../user.model";
+import { Role } from "../../role/role.model";
+import { map, switchMap } from "rxjs/operators";
 import { Location } from '@angular/common';
 
 @Component({
@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Fetch all roles for the checkbox list
-    this.store.dispatch(new RoleActions.GetRoles({pageIndex: 0, pageSize: 100}))
+    this.store.dispatch(new RoleActions.GetRoles({ pageIndex: 0, pageSize: 100 }))
 
     this.routeSubscription = this.route.params.pipe(
       map(params => {
@@ -47,7 +47,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
         this.editMode = !isNaN(id)
 
         if (this.editMode) {
-          this.store.dispatch(new UserActions.GetUser({id: this.id}))
+          this.store.dispatch(new UserActions.GetUser({ id: this.id }))
         } else {
           this.store.dispatch(new UserActions.ClearUser())
         }
@@ -69,10 +69,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
   private initForm() {
     let userUsername = this.user.username
     let userFullname = this.user.fullname
+    let userEmail = this.user.email
 
     this.userForm = new FormGroup({
       'username': new FormControl(userUsername, Validators.required),
       'fullname': new FormControl(userFullname, Validators.required),
+      'email': new FormControl(userEmail, [Validators.required, Validators.email]),
       'password': new FormControl('', this.editMode ? null : Validators.required),
     })
   }
@@ -80,7 +82,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.editMode) {
       this.userForm.value.id = this.id
-      this.store.dispatch(new UserActions.UpdateUser({id: this.id,
+      this.store.dispatch(new UserActions.UpdateUser({
+        id: this.id,
         user: this.userForm.value
       }))
     } else {
@@ -103,7 +106,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   onAssignRoles() {
-    const roles = this.selectedRoleIds.map(id => ({id}))
+    const roles = this.selectedRoleIds.map(id => ({ id }))
     this.store.dispatch(new UserActions.AssignRoles({
       id: this.id,
       roles: roles
